@@ -1,9 +1,9 @@
 <template>
-  <div>首页</div>
+  <div>线路</div>
 </template>
 
 <script>
 </script>
 
-<style scoped>
+<style>
 </style>
