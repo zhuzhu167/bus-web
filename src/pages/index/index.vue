@@ -3,7 +3,7 @@
     <div class="index-search">
       <div class="index-position">定位</div>
       <div class="index-search-input">
-        <div class="input">搜索公交线路，车站，地点</div>
+        <div @click="toSearch()" class="input">搜索公交线路，车站，地点</div>
       </div>
     </div>
     <div class="index-context">
@@ -21,6 +21,16 @@
 <script>
 import StationCard from "@/components/stationCard";
 export default {
+  data() {
+    return {};
+  },
+  methods: {
+    toSearch() {
+      wx.navigateTo({
+        url: "/pages/search/main"
+      });
+    }
+  },
   components: {
     StationCard
   }
