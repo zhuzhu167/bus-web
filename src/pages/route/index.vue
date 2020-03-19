@@ -5,9 +5,12 @@
         <div class="route-title">路线</div>
       </div>
       <div class="route-input">
-        <input type="text" />
+        <input type="text" v-model="from" placeholder="出发点" />
         <div class="line"></div>
-        <input type="text" />
+        <input type="text" v-model="to" placeholder="目的点" />
+        <div class="exchange-icon" @click="exchangeFromTo()">
+          <i class="fa fa-exchange" aria-hidden="true"></i>
+        </div>
       </div>
     </div>
     <div class="common-location">
@@ -18,6 +21,24 @@
 </template>
 
 <script>
+export default {
+  data() {
+    return {
+      from: "",
+      to: ""
+    };
+  },
+  methods: {
+    exchangeFromTo() {
+      let temp = "";
+      if (this.from != "" && this.to != "") {
+        temp = this.from;
+        this.from = this.to;
+        this.to = temp;
+      }
+    }
+  }
+};
 </script>
 
 <style>
@@ -37,6 +58,8 @@ page {
 }
 .route-input {
   padding: 0 30px;
+  color: #a3a3a3;
+  position: relative;
 }
 .route-input input {
   height: 100px;
@@ -46,8 +69,24 @@ page {
   font-size: 27px;
 }
 .line {
-  height: 10px;
   background-color: #ffffff;
+  height: 10px;
+}
+.exchange-icon {
+  position: absolute;
+  z-index: 2;
+  top: 33%;
+  right: 20%;
+  transform: rotate(90deg);
+  font-size: 35px;
+  color: #fec84f;
+  border-radius: 80rpx;
+  background-color: #fff;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px 0px;
 }
 .common-location {
   padding: 20px 0 20px 30px;

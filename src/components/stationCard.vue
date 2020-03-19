@@ -1,7 +1,7 @@
 <template>
   <div class="card-container">
     <div class="card">
-      <div class="card-title"> 
+      <div class="card-title">
         <div class="card-station">荔湾{{n}}</div>
         <div class="card-station-num">3个站点</div>
         <div class="card-station-distance">500m</div>
@@ -48,6 +48,11 @@
 .card-station {
   font-size: 35px;
   margin-right: 20px;
+}
+.card-station img {
+  width: 30px;
+  height: 30px;
+  vertical-align: center;
 }
 .card-station-num {
   color: #a8a8a8;

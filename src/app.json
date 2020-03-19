@@ -4,7 +4,10 @@
     "pages/route/main",
     "pages/news/main",
     "pages/user/main",
-    "pages/search/main"
+    "pages/search/main",
+    "pages/busRemind/main",
+    "pages/suggest/main",
+    "pages/set/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

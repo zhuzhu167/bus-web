@@ -8,12 +8,25 @@
     </div>
     <div class="index-context">
       <div class="index-select">
-        <div class="index-point">附近站点</div>
-        <div class="index-route">历史线路</div>
+        <div
+          class="index-point"
+          v-bind:class="{ 'input-border': cardToggle }"
+          @click="cardToggleFn(true)"
+        >
+          附近站点
+        </div>
+        <div
+          class="index-route"
+          v-bind:class="{ 'input-border': !cardToggle }"
+          @click="cardToggleFn(false)"
+        >
+          历史线路
+        </div>
       </div>
-      <div class="index-card-list">
+      <div class="index-card-list" v-show="cardToggle">
         <StationCard></StationCard>
       </div>
+      <div v-show="cardToggle"></div>
     </div>
   </div>
 </template>
@@ -22,14 +35,36 @@
 import StationCard from "@/components/stationCard";
 export default {
   data() {
-    return {};
+    return {
+      cardToggle: true
+    };
   },
   methods: {
     toSearch() {
       wx.navigateTo({
         url: "/pages/search/main"
       });
-    }
+    },
+    cardToggleFn(bol) {
+      if (this.cardToggleFn != bol) {
+        this.cardToggle = bol;
+      }
+    },
+    // getLocation() {
+    //   var myAmapFun = new amapFile.AMapWX({
+    //     key: "94d4bb757ed3cc2656b8f91e03665b0f"
+    //   });
+    //   myAmapFun.getWeather({
+    //     success: function(data) {
+    //       //成功回调
+    //       console.log(data);
+    //     },
+    //     fail: function(info) {
+    //       //失败回调
+    //       console.log(info);
+    //     }
+    //   });
+    // }
   },
   components: {
     StationCard
@@ -81,10 +116,12 @@ page {
 }
 .index-point {
   margin: 0 15px;
-  border-bottom: 8px solid #fec84f;
 }
 .index-route {
   margin: 0 15px;
+}
+.input-border {
+  border-bottom: 8px solid #fec84f;
 }
 .index-card-list {
   padding: 0 25px;
