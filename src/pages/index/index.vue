@@ -1,7 +1,7 @@
 <template>
   <div class="index-container">
     <div class="index-search">
-      <div class="index-position">定位</div>
+      <div class="index-position">{{ city_name }}</div>
       <div class="index-search-input">
         <div @click="toSearch()" class="input">搜索公交线路，车站，地点</div>
       </div>
@@ -12,16 +12,12 @@
           class="index-point"
           v-bind:class="{ 'input-border': cardToggle }"
           @click="cardToggleFn(true)"
-        >
-          附近站点
-        </div>
+        >附近站点</div>
         <div
           class="index-route"
           v-bind:class="{ 'input-border': !cardToggle }"
           @click="cardToggleFn(false)"
-        >
-          历史线路
-        </div>
+        >历史线路</div>
       </div>
       <div class="index-card-list" v-show="cardToggle">
         <StationCard></StationCard>
@@ -33,13 +29,54 @@
 
 <script>
 import StationCard from "@/components/stationCard";
+import amap from "amap-wx";
 export default {
   data() {
     return {
-      cardToggle: true
+      cardToggle: true,
+      markersData: {
+        latitude: "", //纬度
+        longitude: "", //经度
+        key: "94d4bb757ed3cc2656b8f91e03665b0f" //申请的高德地图key（申请的web key）
+      },
+      gpsCode: "",
+      city_name: "正在定位"
     };
   },
+  created() {
+    this.getLocation();
+  },
   methods: {
+    //获取经纬度
+    getLocation() {
+      var that = this;
+      //调用自带位置获取
+      wx.getLocation({
+        type: "gcj02",
+        //返回可以用于wx.openLocation的经纬度
+        success: function(res) {
+          let latitude = res.latitude; //维度
+          let longitude = res.longitude; //经度
+          that.loadCity(latitude, longitude); //调用高德
+        }
+      });
+    },
+    //调用高德api
+    loadCity(latitude, longitude) {
+      var that = this;
+      var myAmapFun = new amap.AMapWX({ key: that.markersData.key });
+
+      myAmapFun.getRegeo({
+        location: "" + longitude + "," + latitude + "", //location的格式为'经度,纬度'
+        success: function(data) {
+          var cityCode = data[0].regeocodeData.addressComponent.adcode; //获取城市code
+          that.gpsCode = cityCode;
+          that.city_name = data[0].regeocodeData.addressComponent.city; //获取
+        },
+        fail: function(info) {}
+      });
+    },
+    //跳转
     toSearch() {
       wx.navigateTo({
         url: "/pages/search/main"
@@ -49,7 +86,7 @@ export default {
       if (this.cardToggleFn != bol) {
         this.cardToggle = bol;
       }
-    },
+    }
     // getLocation() {
     //   var myAmapFun = new amapFile.AMapWX({
     //     key: "94d4bb757ed3cc2656b8f91e03665b0f"
@@ -92,6 +129,8 @@ page {
 .index-position {
   flex: 1;
   text-align: center;
+  overflow: hidden;
+  padding: 0 10rpx;
 }
 .index-search-input {
   flex: 3;

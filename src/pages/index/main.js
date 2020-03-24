@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './index'
+import store from '../../vuex/index'
 
+Vue.prototype.$store = store
 // add this to handle exception
 Vue.config.errorHandler = function (err) {
   if (console && console.error) {

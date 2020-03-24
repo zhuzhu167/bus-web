@@ -2,7 +2,7 @@
   <div>
     <div class="user-login">
       <div class="login">
-        <div class="login-do">点击登录</div>
+        <div class="login-do" v-on:click>点击登录</div>
         <div class="login-tip">登录可以个性化编辑</div>
       </div>
       <div class="user-pic">
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import store from "../../vuex/index";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -34,16 +36,24 @@ export default {
         clock: "/pages/busRemind/main",
         suggest: "/pages/suggest/main",
         set: "/pages/set/main"
-      }
+      },
+      isClicked: false
     };
   },
   methods: {
+    ...mapActions("user", ["Register"]),
     toUrl(url) {
+      let _this = this;
+      this.isClicked = true;
       wx.navigateTo({
         url: this.urlList[url]
       });
+      setTimeout(function() {
+        _this.isClicked = false;
+      }, 50);
     }
-  }
+  },
+  store
 };
 </script>
 
@@ -94,5 +104,8 @@ page {
   line-height: 110px;
   padding-left: 50px;
   font-size: 26px;
+}
+.user-do-item:active {
+  background-color: #f1f1f1;
 }
 </style>

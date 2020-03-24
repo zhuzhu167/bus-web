@@ -88,6 +88,9 @@ page {
   line-height: 80px;
   box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px 0px;
 }
+.exchange-icon:active {
+  background-color: #f1f1f1;
+}
 .common-location {
   padding: 20px 0 20px 30px;
 }

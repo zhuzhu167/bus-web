@@ -120,6 +120,9 @@ page {
   padding: 0 30px;
   display: flex;
 }
+.msg-item:active {
+  background-color: #f1f1f1;
+}
 .item-text {
   flex: 1;
 }
