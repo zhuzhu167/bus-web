@@ -1,19 +1,44 @@
 import {
-  aUser
+  aUser,
+  fUser
 } from '@/api/user'
 
 // 注册
 export const Register = ({
   commit
 }, data) => {
-  aUser()
-  // data = {
-  //   loginName: 'yezhonghao',
-  //   password: 'qwertyu',
-  //   phone: '13112357605',
-  //   userName: 'tezhonghao'
-  // }
-  // aUser(data).then(result => {
-  //   console.log(result)
-  // })
+  aUser(data).then(res => {
+    if (res.data.status === 200) {
+      wx.showToast({
+        title: '注册成功',
+        icon: 'success',
+        duration: 2000
+      })
+      wx.switchTab({
+        url: '/pages/user/main'
+      })
+      commit('LOGIN', true)
+      commit('SET_USERNAME', data.userName)
+    }
+  })
+}
+// 登录
+export const Login = ({
+  commit
+}, data) => {
+  fUser(data).then(res => {
+    console.log(res)
+    if (res.data.status === 200) {
+      wx.showToast({
+        title: '登录成功',
+        icon: 'success',
+        duration: 2000
+      })
+      wx.switchTab({
+        url: '/pages/user/main'
+      })
+      commit('LOGIN', true)
+      commit('SET_USERNAME', res.data.data)
+    }
+  })
 }

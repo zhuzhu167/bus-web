@@ -2,11 +2,13 @@
   <div>
     <div class="user-login">
       <div class="login">
-        <div class="login-do" v-on:click>点击登录</div>
-        <div class="login-tip">登录可以个性化编辑</div>
-      </div>
-      <div class="user-pic">
-        <img src="../../../static/tabs/user.png" />
+        <div v-if="!IsLogin">
+          <div class="login-do" @click="toUrl('login')">点击登录</div>
+          <div class="login-tip">登录可以个性化编辑</div>
+        </div>
+        <div v-if="IsLogin">
+          <div class="login-done">您好，{{ UserName }}</div>
+        </div>
       </div>
     </div>
     <div class="user-do-list">
@@ -28,20 +30,24 @@
 
 <script>
 import store from "../../vuex/index";
-import { mapState, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
       urlList: {
         clock: "/pages/busRemind/main",
         suggest: "/pages/suggest/main",
-        set: "/pages/set/main"
+        set: "/pages/set/main",
+        login: "/pages/login/main"
       },
       isClicked: false
     };
   },
+  computed: {
+    ...mapGetters("user", ["IsLogin", "UserName"])
+  },
   methods: {
-    ...mapActions("user", ["Register"]),
+    // 控制页面跳转
     toUrl(url) {
       let _this = this;
       this.isClicked = true;
@@ -51,6 +57,9 @@ export default {
       setTimeout(function() {
         _this.isClicked = false;
       }, 50);
+    },
+    demo() {
+      console.log(this.IsLogin);
     }
   },
   store
@@ -64,29 +73,44 @@ page {
 </style>
 <style scoped>
 .user-login {
-  background-color: #ffffff;
-  display: flex;
+  background-color: #fec84f;
   padding: 30px;
   margin-bottom: 25px;
+  height: 200rpx;
 }
 .login {
-  flex: 1.5;
+  text-align: center;
 }
 .login-do {
-  font-size: 50px;
-  margin-bottom: 20px;
+  font-size: 60px;
+  margin-bottom: 40px;
+  background-color: #fec84f;
+  padding-left: 0;
+}
+.login-done {
+  font-size: 70rpx;
+  margin-bottom: 40rpx;
+  background-color: #fec84f;
+  padding-left: 0;
+  padding: 40rpx;
+  overflow: hidden;
+  height: 75rpx;
 }
 .login-tip {
-  color: #a3a3a3;
+  color: #fff;
   font-size: 35px;
 }
 .user-pic {
   flex: 1;
-  text-align: right;
+  position: relative;
 }
 .user-pic img {
   width: 130rpx;
   height: 130rpx;
+  position: absolute;
+  top: 15%;
+  right: 0;
+  margin-right: 10px;
 }
 .user-do-list {
   background-color: #ffffff;

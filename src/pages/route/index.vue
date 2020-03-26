@@ -49,7 +49,7 @@ page {
 </style>
 <style scoped>
 .route-container {
-  background-color: #ffffff;
+  background-color: #fec84f;
   padding-bottom: 30px;
 }
 .route-title {
@@ -69,7 +69,7 @@ page {
   font-size: 27px;
 }
 .line {
-  background-color: #ffffff;
+  background-color: #fec84f;
   height: 10px;
 }
 .exchange-icon {

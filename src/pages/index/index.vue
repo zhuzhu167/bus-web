@@ -87,21 +87,6 @@ export default {
         this.cardToggle = bol;
       }
     }
-    // getLocation() {
-    //   var myAmapFun = new amapFile.AMapWX({
-    //     key: "94d4bb757ed3cc2656b8f91e03665b0f"
-    //   });
-    //   myAmapFun.getWeather({
-    //     success: function(data) {
-    //       //成功回调
-    //       console.log(data);
-    //     },
-    //     fail: function(info) {
-    //       //失败回调
-    //       console.log(info);
-    //     }
-    //   });
-    // }
   },
   components: {
     StationCard
@@ -121,7 +106,7 @@ page {
 }
 .index-search {
   display: flex;
-  background-color: #fff;
+  background-color: #fec84f;
   height: 70px;
   line-height: 70px;
   padding: 30px 0;

@@ -17,6 +17,6 @@ page {
 .new-title {
   padding: 20px 0 20px 30px;
   font-size: 50px;
-  background-color: #ffffff;
+  background-color: #fec84f;
 }
 </style>
