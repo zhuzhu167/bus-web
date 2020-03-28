@@ -33,7 +33,7 @@ page {
   height: 100px;
   background-color: #fff;
   line-height: 100px;
-  padding: 0 35rpx;
+  padding: 0 35px;
 }
 .remind-title {
   font-size: 40px;

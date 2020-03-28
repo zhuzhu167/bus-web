@@ -11,24 +11,39 @@
         <div class="exchange-icon" @click="exchangeFromTo()">
           <i class="fa fa-exchange" aria-hidden="true"></i>
         </div>
+        <button class="route-btn" @click="find()">搜索</button>
       </div>
     </div>
-    <div class="common-location">
+    <div class="common-location" v-if="!TransferIsShow">
       <div class="common-title">常用地点</div>
       <div class="common-context"></div>
+    </div>
+    <div v-if="TransferIsShow" class="route-card">
+      <div class="card">
+        <div class="card-title">{{ start }} -> {{ end }}</div>
+        <div class="card-context">{{ TransferList }}</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+import store from "../../vuex/index";
 export default {
   data() {
     return {
       from: "",
-      to: ""
+      to: "",
+      start: "",
+      end: ""
     };
   },
+  computed: {
+    ...mapGetters("bus", ["TransferList", "TransferIsShow"])
+  },
   methods: {
+    ...mapActions("bus", ["LessTransfer"]),
     exchangeFromTo() {
       let temp = "";
       if (this.from != "" && this.to != "") {
@@ -36,8 +51,18 @@ export default {
         this.from = this.to;
         this.to = temp;
       }
+    },
+    find() {
+      let data = {
+        start: this.from,
+        end: this.to
+      };
+      this.LessTransfer(data);
+      this.start = this.from;
+      this.end = this.to;
     }
-  }
+  },
+  store
 };
 </script>
 
@@ -75,7 +100,7 @@ page {
 .exchange-icon {
   position: absolute;
   z-index: 2;
-  top: 33%;
+  top: 20%;
   right: 20%;
   transform: rotate(90deg);
   font-size: 35px;
@@ -90,6 +115,39 @@ page {
 }
 .exchange-icon:active {
   background-color: #f1f1f1;
+}
+.route-btn {
+  margin: 0 auto;
+  height: 80px;
+  font-size: 35px;
+  font-weight: normal;
+  background: #fff;
+  color: #000;
+  border-radius: 10px;
+  line-height: 80px;
+  margin-top: 30px;
+}
+button::after {
+  border: none;
+}
+.route-card {
+  padding: 20rpx 25rpx;
+}
+.card {
+  height: 200rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 0 35rpx;
+}
+.card-title {
+  height: 110rpx;
+  line-height: 110rpx;
+}
+.card-context {
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #a8a8a8;
+  font-size: 32rpx;
 }
 .common-location {
   padding: 20px 0 20px 30px;

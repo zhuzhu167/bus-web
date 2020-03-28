@@ -142,7 +142,7 @@ page {
   flex: 1;
   line-height: 130px;
   text-align: center;
-  font-size: 30rpx;
+  font-size: 30px;
   background-color: #409eff;
   color: #fff;
 }

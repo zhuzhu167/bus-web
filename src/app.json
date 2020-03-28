@@ -9,7 +9,8 @@
     "pages/suggest/main",
     "pages/set/main",
     "pages/login/main",
-    "pages/register/main"
+    "pages/register/main",
+    "pages/like/main"
   ],
   "permission": {
     "scope.userLocation": {

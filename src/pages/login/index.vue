@@ -63,11 +63,11 @@ page {
   flex-direction: column;
 }
 .login-title {
-  height: 100rpx;
+  height: 100px;
   text-align: center;
-  padding: 30rpx;
-  font-size: 50rpx;
-  line-height: 100rpx;
+  padding: 30px;
+  font-size: 50px;
+  line-height: 100px;
   flex: 2;
 }
 .login-input {
@@ -92,7 +92,7 @@ page {
   color: #fff;
   border-radius: 10px;
   line-height: 80px;
-  margin-top: 10rpx;
+  margin-top: 10px;
 }
 button::after {
   border: none;

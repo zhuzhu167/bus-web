@@ -3,7 +3,7 @@
     <div class="user-login">
       <div class="login">
         <div v-if="!IsLogin">
-          <div class="login-do" @click="toUrl('login')">点击登录</div>
+          <div class="login-do" @click="toLogin()">点击登录</div>
           <div class="login-tip">登录可以个性化编辑</div>
         </div>
         <div v-if="IsLogin">
@@ -15,7 +15,7 @@
       <div class="user-do-item" v-on:click="toUrl('clock')">
         <img src="../../../static/tabs/clock.png" />上车提醒
       </div>
-      <div class="user-do-item">
+      <div class="user-do-item" v-on:click="toUrl('like')">
         <img src="../../../static/tabs/good.png" />好评鼓励
       </div>
       <div class="user-do-item" v-on:click="toUrl('suggest')">
@@ -31,6 +31,7 @@
 <script>
 import store from "../../vuex/index";
 import { mapGetters, mapActions } from "vuex";
+import { IsLogin } from "../../vuex/user/getters";
 export default {
   data() {
     return {
@@ -38,7 +39,7 @@ export default {
         clock: "/pages/busRemind/main",
         suggest: "/pages/suggest/main",
         set: "/pages/set/main",
-        login: "/pages/login/main"
+        like: "/pages/like/main"
       },
       isClicked: false
     };
@@ -49,17 +50,27 @@ export default {
   methods: {
     // 控制页面跳转
     toUrl(url) {
-      let _this = this;
-      this.isClicked = true;
-      wx.navigateTo({
-        url: this.urlList[url]
-      });
-      setTimeout(function() {
-        _this.isClicked = false;
-      }, 50);
+      if (this.IsLogin) {
+        let _this = this;
+        this.isClicked = true;
+        wx.navigateTo({
+          url: this.urlList[url]
+        });
+        setTimeout(function() {
+          _this.isClicked = false;
+        }, 50);
+      } else {
+        wx.showToast({
+          title: "请先登录",
+          icon: "none",
+          duration: 2000
+        });
+      }
     },
-    demo() {
-      console.log(this.IsLogin);
+    toLogin() {
+      wx.navigateTo({
+        url: "/pages/login/main"
+      });
     }
   },
   store
@@ -76,7 +87,7 @@ page {
   background-color: #fec84f;
   padding: 30px;
   margin-bottom: 25px;
-  height: 200rpx;
+  height: 200px;
 }
 .login {
   text-align: center;
@@ -88,13 +99,13 @@ page {
   padding-left: 0;
 }
 .login-done {
-  font-size: 70rpx;
-  margin-bottom: 40rpx;
+  font-size: 70px;
+  margin-bottom: 40px;
   background-color: #fec84f;
   padding-left: 0;
-  padding: 40rpx;
+  padding: 40px;
   overflow: hidden;
-  height: 75rpx;
+  height: 75px;
 }
 .login-tip {
   color: #fff;
@@ -105,8 +116,8 @@ page {
   position: relative;
 }
 .user-pic img {
-  width: 130rpx;
-  height: 130rpx;
+  width: 130px;
+  height: 130px;
   position: absolute;
   top: 15%;
   right: 0;

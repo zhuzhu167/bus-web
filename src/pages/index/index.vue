@@ -3,7 +3,7 @@
     <div class="index-search">
       <div class="index-position">{{ city_name }}</div>
       <div class="index-search-input">
-        <div @click="toSearch()" class="input">搜索公交线路，车站，地点</div>
+        <div @click="toSearch()" class="input">搜索公交线路，车站</div>
       </div>
     </div>
     <div class="index-context">
@@ -20,7 +20,9 @@
         >历史线路</div>
       </div>
       <div class="index-card-list" v-show="cardToggle">
-        <StationCard></StationCard>
+        <div v-if="SynsStationShow">
+          <StationCard :route="SynsStationList" :station="place"></StationCard>
+        </div>
       </div>
       <div v-show="cardToggle"></div>
     </div>
@@ -30,6 +32,8 @@
 <script>
 import StationCard from "@/components/stationCard";
 import amap from "amap-wx";
+import { mapGetters, mapActions } from "vuex";
+import store from "../../vuex/index";
 export default {
   data() {
     return {
@@ -40,13 +44,19 @@ export default {
         key: "94d4bb757ed3cc2656b8f91e03665b0f" //申请的高德地图key（申请的web key）
       },
       gpsCode: "",
-      city_name: "正在定位"
+      city_name: "正在定位",
+      place: "芙蓉园"
     };
   },
   created() {
     this.getLocation();
+    this.GetRoutesMsg(this.place);
+  },
+  computed: {
+    ...mapGetters("bus", ["SynsStationList", "SynsStationShow"])
   },
   methods: {
+    ...mapActions("bus", ["GetRoutesMsg"]),
     //获取经纬度
     getLocation() {
       var that = this;
@@ -90,7 +100,8 @@ export default {
   },
   components: {
     StationCard
-  }
+  },
+  store
 };
 </script>
 <style>
@@ -115,14 +126,14 @@ page {
   flex: 1;
   text-align: center;
   overflow: hidden;
-  padding: 0 10rpx;
+  padding: 0 10px;
 }
 .index-search-input {
   flex: 3;
 }
 .input {
   height: 70px;
-  background-color: #efefef;
+  background-color: #f8f8f8;
   border-radius: 50px;
   width: 93%;
   text-indent: 20px;

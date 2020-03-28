@@ -2,28 +2,17 @@
   <div class="card-container">
     <div class="card">
       <div class="card-title">
-        <div class="card-station">荔湾{{n}}</div>
+        <div class="card-station">{{ station }}</div>
         <div class="card-station-num">3个站点</div>
         <div class="card-station-distance">500m</div>
       </div>
-      <div class="card-station-route">
+      <div class="card-station-route" v-for="(item,index) in route[0]" :key="index">
         <div class="one">
-          <div class="from-to">罗城-金鸡</div>
-          <div class="bus-num">末班已过</div>
+          <div class="from-to">{{ item.rname }}</div>
         </div>
         <div class="two">
-          <div class="destination">开往金鸡</div>
-          <div class="time">首6:00|末17:10</div>
-        </div>
-      </div>
-      <div class="card-station-route">
-        <div class="one">
-          <div class="from-to">罗城-金鸡</div>
-          <div class="bus-num">末班已过</div>
-        </div>
-        <div class="two">
-          <div class="destination">开往金鸡</div>
-          <div class="time">首6:00|末17:10</div>
+          <div class="destination">开往{{ item.startSta }}</div>
+          <div class="time">首{{ item.startT }}|末{{ item.endT }}</div>
         </div>
       </div>
     </div>
@@ -31,6 +20,31 @@
 </template>
 
 <script>
+export default {
+  props: {
+    route: {
+      type: Object,
+      default: {}
+    },
+    station: {
+      type: String,
+      default: "未知"
+    }
+  },
+  data() {
+    return {
+      arr: []
+    };
+  },
+  created() {
+    this.demo();
+  },
+  methods: {
+    demo() {
+      console.log(this.route);
+    }
+  }
+};
 </script>
 
 <style>

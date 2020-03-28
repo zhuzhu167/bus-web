@@ -80,11 +80,11 @@ page {
   flex-direction: column;
 }
 .register-title {
-  height: 150rpx;
+  height: 150px;
   text-align: center;
-  padding: 30rpx;
-  font-size: 50rpx;
-  line-height: 150rpx;
+  padding: 30px;
+  font-size: 50px;
+  line-height: 150px;
   flex: 1;
 }
 .register-input {
@@ -110,7 +110,7 @@ page {
   color: #fff;
   border-radius: 10px;
   line-height: 80px;
-  margin-top: 10rpx;
+  margin-top: 10px;
 }
 button::after {
   border: none;

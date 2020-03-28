@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     demo: 'user.js',
-    is_login: false,
+    is_login: true,
     userName: ''
   },
   actions,
