@@ -68,7 +68,7 @@ page {
 }
 .search-head input {
   height: 80px;
-  background-color: #fbfbfb;
+  background-color: #fff;
   border-radius: 50px;
   font-size: 30px;
   color: #a3a3a3;

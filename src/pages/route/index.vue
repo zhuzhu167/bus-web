@@ -22,7 +22,10 @@
     <div v-if="TransferIsShow" class="route-card">
       <div class="card">
         <div class="card-title">{{ start }} -> {{ end }}</div>
-        <div class="card-context">{{ TransferList }}</div>
+        <div class="card-context">
+          坐{{ TransferList[0] }}号线，在{{ TransferList[2] }}站转
+          {{ TransferList[1] }}号线
+        </div>
       </div>
     </div>
   </div>
@@ -158,6 +161,7 @@ button::after {
 .card-title {
   height: 110rpx;
   line-height: 110rpx;
+  font-size: 37rpx;
 }
 .card-context {
   height: 90rpx;

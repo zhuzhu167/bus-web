@@ -14,3 +14,8 @@ export const getRMsg = (name) => _axios({
   url: `/bus/getRoutesMsg?name=${name}`,
   method: 'get'
 })
+
+export const getS = (id) => _axios({
+  url: `/bus/getStations?id=${id}`,
+  method: 'get'
+})

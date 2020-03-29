@@ -1,14 +1,13 @@
 <template>
   <div>
     <i-toast id="toast" />
-    <i-panel title="点赞信息">
-      <i-cell title="公交线路">
-        <input slot="footer" class="weui-input" placeholder="必填项" />
-      </i-cell>
-      <i-cell title="公交号码">
-        <input slot="footer" class="weui-input" placeholder="必填项" />
-      </i-cell>
-    </i-panel>
+    <div class="card-title">点赞信息</div>
+    <i-cell title="公交线路">
+      <input slot="footer" v-model="route" class="weui-input" placeholder="必填项" />
+    </i-cell>
+    <i-cell title="公交号码">
+      <input slot="footer" v-model="num" class="weui-input" placeholder="必填项" />
+    </i-cell>
     <i-button v-on:click="like()" type="success" shape="circle" size="small">点赞</i-button>
   </div>
 </template>
@@ -19,9 +18,12 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      route: "231",
-      num: "2313"
+      route: "",
+      num: ""
     };
+  },
+  mounted() {
+    Object.assign(this.$data, this.$options.data());
   },
   methods: {
     ...mapActions("user", ["Like"]),
@@ -33,6 +35,8 @@ export default {
           userid: "liangzhu167"
         };
         this.Like(data);
+        this.route = "";
+        this.num = "";
       } else if (this.route == "") {
         $Toast({
           content: "公交线路不能为空",
@@ -55,4 +59,9 @@ page {
 }
 </style>
 <style scoped>
+.card-title {
+  margin: 30px 30px 30px 40px;
+  color: #a8a8a8;
+  font-size: 30px;
+}
 </style>

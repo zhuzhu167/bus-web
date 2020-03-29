@@ -29,7 +29,7 @@ export const Dlost = (id) => _axios({
 })
 
 export const userF = (data) => _axios({
-  url: `/user/feedBack`,
+  url: `/user/feedback`,
   method: 'post',
   data
 })

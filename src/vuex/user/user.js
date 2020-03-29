@@ -6,9 +6,10 @@ export default {
   namespaced: true,
   state: {
     demo: 'user.js',
-    is_login: true,
+    is_login: false,
     userName: '',
-    is_remind: false
+    is_remind: false,
+    clockList: []
   },
   actions,
   mutations,

@@ -3,55 +3,55 @@
     <i-toast id="toast" />
     <div class="card-title">快速反馈</div>
     <div class="msg-card">
-      <div class="msg-item" v-on:click="toFeedBack()">
+      <div class="msg-item" @click="toFeedBack('线路变更')">
         <div class="item-text">线路变更</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toFeedBack('暂无实时信息')">
         <div class="item-text">暂无实时信息</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toFeedBack('位置定位错误')">
         <div class="item-text">位置定位错误</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toFeedBack('网络不给力')">
         <div class="item-text">网络不给力</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toFeedBack('车辆到站不准确')">
         <div class="item-text">车辆到站不准确</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toFeedBack('线路尚未开通')">
         <div class="item-text">线路尚未开通</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toFeedBack('软件问题')">
         <div class="item-text">软件问题</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toFeedBack('我要吐槽<')">
         <div class="item-text">我要吐槽</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toFeedBack('侵权投诉')">
         <div class="item-text">侵权投诉</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -60,25 +60,25 @@
     </div>
     <div class="card-title">常见问题</div>
     <div class="msg-card">
-      <div class="msg-item">
+      <div class="msg-item" @click="toHelp('线路尚未开通/暂时无实时信息')">
         线路尚未开通/暂时无实时信息
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toHelp('实时路况查看方法')">
         <div class="item-text">实时路况查看方法</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toHelp('小车支持的城市')">
         <div class="item-text">小车支持的城市</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="msg-item">
+      <div class="msg-item" @click="toHelp('软件显示有车，却实际没有')">
         <div class="item-text">软件显示有车，却实际没有</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -95,9 +95,14 @@
 <script>
 export default {
   methods: {
-    toFeedBack() {
+    toFeedBack(msg) {
       wx.navigateTo({
-        url: "/pages/suggestOne/main"
+        url: "/pages/suggestOne/main?msg=" + msg
+      });
+    },
+    toHelp(msg) {
+      wx.navigateTo({
+        url: "/pages/suggestTwo/main?msg=" + msg
       });
     }
   }

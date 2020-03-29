@@ -20,3 +20,7 @@ export const SET_SYNSTATION_SHOW = (state, data) => {
 export const SET_SYNSTATIONLIST = (state, data) => {
   state.synsStationList.push(data)
 }
+
+export const SET_STATIONLIST = (state, data) => {
+  state.stationList = data
+}

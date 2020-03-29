@@ -7,13 +7,13 @@
         alt
       />
 
-      <input type="text" placeholder="搜索公交线路" />
-      <button class="search-btn">搜索</button>
+      <input v-model="num" type="text" placeholder="搜索公交线路" />
+      <button class="search-btn" @click="search()">搜索</button>
     </div>
     <div>
-      <div class="search-card" v-on:click="toNext()">
+      <div class="search-card" v-on:click="toNext()" v-if="RouteIsShow">
         <div class="card-title">
-          <p class="title-route">1号线</p>
+          <p class="title-route">{{ RouteList.rname }}</p>
           <div class="item-img">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
           </div>
@@ -24,14 +24,40 @@
 </template>
 
 <script>
+const { $Toast } = require("../../../static/dist/base/index");
+import { mapActions, mapGetters, mapMutations } from "vuex";
+import store from "../../vuex/index";
 export default {
+  data() {
+    return {
+      num: ""
+    };
+  },
+  computed: {
+    ...mapGetters("bus", ["RouteList", "RouteIsShow"])
+  },
   methods: {
+    ...mapActions("bus", ["SearchRoute"]),
+    ...mapMutations("bus", ["SET_ROUTE_SHOW"]),
     toNext() {
       wx.navigateTo({
-        url: "/pages/busRemindTwo/main"
+        url: "/pages/busRemindTwo/main?busNum=" + this.num
       });
+      this.SET_ROUTE_SHOW(false);
+      Object.assign(this.$data, this.$options.data());
+    },
+    search() {
+      if (this.num != "") {
+        this.SearchRoute(this.num);
+      } else {
+        $Toast({
+          content: "公交线路不能为空",
+          type: "error"
+        });
+      }
     }
-  }
+  },
+  store
 };
 </script>
 <style>
@@ -49,7 +75,7 @@ page {
 }
 .search-head input {
   height: 80px;
-  background-color: #fbfbfb;
+  background-color: #fff;
   border-radius: 50px;
   font-size: 30px;
   color: #a3a3a3;
@@ -96,7 +122,7 @@ button::after {
   display: flex;
 }
 .title-route {
-  flex: 1;
+  flex: 3;
 }
 .item-img {
   flex: 1;

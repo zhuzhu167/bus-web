@@ -10,11 +10,13 @@ export default {
     routeList: {},
     routeIsShow: false,
     // 换乘查询
-    transferList: {},
+    transferList: [],
     transferIsShow: false,
     // 实时站点
     synsStationList: [],
-    synsStationShow: false
+    synsStationShow: false,
+    // 站点列表
+    stationList: []
   },
   actions,
   mutations,

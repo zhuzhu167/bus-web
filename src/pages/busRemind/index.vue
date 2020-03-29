@@ -8,7 +8,13 @@
     </div>
     <div v-if="IsRemind">
       <i-panel title="闹钟列表">
-        <i-cell label="闹钟 6:00" title="1号线" value="芙蓉站"></i-cell>
+        <i-cell
+          v-for="(item,index) in ClockList"
+          :key="index"
+          :label="item.busNum + ' 号线'"
+          :title="item.station"
+          :value="item.start + ' - ' + item.end"
+        ></i-cell>
       </i-panel>
     </div>
     <div class="remind-null" v-if="!IsRemind">
@@ -25,7 +31,7 @@ import { mapGetters } from "vuex";
 import store from "../../vuex/index";
 export default {
   computed: {
-    ...mapGetters("user", ["IsRemind"])
+    ...mapGetters("user", ["IsRemind", "ClockList"])
   },
   methods: {
     toNext() {

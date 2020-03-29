@@ -1,7 +1,8 @@
 import {
   findR,
   lessT,
-  getRMsg
+  getRMsg,
+  getS
 } from '@/api/bus'
 const {
   $Toast
@@ -24,7 +25,7 @@ export const SearchRoute = ({
     }
   })
 }
-
+// 出行方案
 export const LessTransfer = ({
   commit
 }, data) => {
@@ -32,7 +33,9 @@ export const LessTransfer = ({
   let end = data.end
   lessT(start, end).then(res => {
     if (res.data.status === 200) {
-      commit('SET_TRANSFER_LIST', res.data.data)
+      let msg = res.data.data
+      let arr = msg.split('-')
+      commit('SET_TRANSFER_LIST', arr)
       commit('SET_TRANSFER_SHOW', true)
     } else {
       $Toast({
@@ -44,7 +47,7 @@ export const LessTransfer = ({
     }
   })
 }
-
+// 获取公交信息
 export const GetRoutesMsg = ({
   commit
 }, data) => {
@@ -59,6 +62,21 @@ export const GetRoutesMsg = ({
       })
       commit('SET_SYNSTATIONLIST', {})
       commit('SET_SYNSTATION_SHOW', false)
+    }
+  })
+}
+// 获取全部站点
+export const GetStations = ({
+  commit
+}, data) => {
+  getS(data).then(res => {
+    if (res.data.status === 200) {
+      commit('SET_STATIONLIST', res.data.data)
+    } else {
+      $Toast({
+        content: '找不到该线路站点',
+        type: 'error'
+      })
     }
   })
 }

@@ -134,7 +134,7 @@ page {
 }
 .input {
   height: 70px;
-  background-color: #f8f8f8;
+  background-color: #fff;
   border-radius: 50px;
   width: 93%;
   text-indent: 20px;

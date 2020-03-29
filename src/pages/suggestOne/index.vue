@@ -1,9 +1,10 @@
 <template>
   <div class="remind-container">
     <i-toast id="toast" />
-    <i-panel title="反馈">
+    <div class="card-title">关于{{ msg }}的反馈</div>
+    <i-panel>
       <i-cell>
-        <textarea auto-height placeholder="请输入您的反馈信息" />
+        <textarea v-model="suggest" auto-height placeholder="请输入您的反馈信息" />
       </i-cell>
     </i-panel>
     <i-button v-on:click="feedBack()" type="success" shape="circle" size="small">提交</i-button>
@@ -11,15 +12,40 @@
 </template>
 
 <script>
+import store from "../../vuex/index";
+import { mapActions } from "vuex";
+const { $Toast } = require("../../../static/dist/base/index");
 export default {
+  data() {
+    return {
+      msg: "",
+      suggest: ""
+    };
+  },
+  onLoad(options) {
+    this.msg = options.msg;
+  },
+  onUnload: function() {
+    Object.assign(this.$data, this.$options.data());
+  },
   methods: {
+    ...mapActions("user", ["FeedBack"]),
     feedBack() {
-      $Toast({
-        content: "提交成功",
-        type: "success"
-      });
+      if (this.msg != "") {
+        let data = {
+          content: this.suggest,
+          userid: "liangzhu167"
+        };
+        this.FeedBack(data);
+      } else {
+        $Toast({
+          content: "反馈信息不能为空",
+          type: "error"
+        });
+      }
     }
-  }
+  },
+  store
 };
 </script>
 <style>
@@ -29,55 +55,9 @@ page {
 }
 </style>
 <style scoped>
-.remind-container {
-}
-.remind-head {
-  height: 100px;
-  background-color: #fff;
-  line-height: 100px;
-  padding: 0 35px;
-}
-.remind-title {
-  font-size: 40px;
-  display: inline-block;
-}
-.remind-add {
-  color: #a3a3a3;
-  display: inline-block;
-  float: right;
-  font-weight: lighter;
-  font-size: 50px;
-}
-.remind-null {
-  position: absolute;
-  top: 30%;
-  width: 100%;
-}
-
-.img-clock {
-  text-align: center;
-}
-.img-clock img {
-  width: 320px;
-  height: 320px;
-}
-.remind-tip {
-  color: #a3a3a3;
-  margin-top: 30px;
+.card-title {
+  margin: 30px 30px 30px 40px;
+  color: #a8a8a8;
   font-size: 30px;
-  text-align: center;
-}
-.remind-add-btn {
-  margin: 0 auto;
-  margin-top: 30px;
-  width: 250px;
-  height: 80px;
-  font-size: 30px;
-  font-weight: normal;
-  background: #fec84f;
-  color: #fff;
-  border-radius: 10px;
-  line-height: 80px;
-  border: 0px;
 }
 </style>
