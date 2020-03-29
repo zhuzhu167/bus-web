@@ -1,6 +1,6 @@
 <template>
   <div class="register-container">
-    <i-message id="message" />
+    <i-toast id="toast" />
     <div class="register-box">
       <div class="register-title">Hi，欢迎加入我们</div>
       <div class="register-input">
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+const { $Toast } = require("../../../static/dist/base/index");
 import store from "../../vuex";
 import { mapActions } from "vuex";
 export default {
@@ -45,6 +46,27 @@ export default {
     ...mapActions("user", ["Register"]),
     // 注册
     register(e) {
+      if (this.loginName == "") {
+        $Toast({
+          content: "账号不能为空",
+          type: "error"
+        });
+        return;
+      }
+      if (this.password == "") {
+        $Toast({
+          content: "密码不能为空",
+          type: "error"
+        });
+        return;
+      }
+      if (this.phone == "") {
+        $Toast({
+          content: "手机号码不能为空",
+          type: "error"
+        });
+        return;
+      }
       let data = {
         loginName: this.loginName,
         password: this.password,
@@ -97,7 +119,7 @@ page {
 .register-input input {
   height: 100px;
   border-radius: 10px;
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
   padding: 0 30px;
   font-size: 27px;
   margin-bottom: 30px;

@@ -1,9 +1,10 @@
 import {
   aUser,
-  fUser
+  fUser,
+  like
 } from '@/api/user'
 const {
-  $Message
+  $Toast
 } = require('../../../static/dist/base/index')
 // 注册
 export const Register = ({
@@ -11,7 +12,7 @@ export const Register = ({
 }, data) => {
   aUser(data).then(res => {
     if (res.data.status === 200) {
-      $Message({
+      $Toast({
         content: '注册成功',
         type: 'success'
       })
@@ -21,7 +22,7 @@ export const Register = ({
       commit('LOGIN', true)
       commit('SET_USERNAME', data.userName)
     } else {
-      $Message({
+      $Toast({
         content: res.data.msg,
         type: 'error'
       })
@@ -35,7 +36,7 @@ export const Login = ({
   fUser(data).then(res => {
     console.log(res)
     if (res.data.status === 200) {
-      $Message({
+      $Toast({
         content: '登录成功',
         type: 'success'
       })
@@ -45,9 +46,28 @@ export const Login = ({
       commit('LOGIN', true)
       commit('SET_USERNAME', res.data.data)
     } else {
-      $Message({
+      $Toast({
         content: res.data.msg,
         type: 'error'
+      })
+    }
+  })
+}
+// 设置提醒
+export const SetRemind = ({
+  commit
+}, data) => {
+  commit('SET_ISREMIND', data)
+}
+// 点赞
+export const Like = ({
+  commit
+}, data) => {
+  like(data).then(res => {
+    if (res.data.status === 200) {
+      $Toast({
+        content: '点赞成功',
+        type: 'success'
       })
     }
   })

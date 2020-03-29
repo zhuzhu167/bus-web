@@ -1,82 +1,98 @@
 <template>
-  <div class="remind-container">
-    <i-message id="message" />
-    <div class="remind-head">
-      <div class="remind-add">
-        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-      </div>
-    </div>
-    <div class="remind-null">
-      <div class="img-clock">
-        <img src="../../../static/tabs/clock.png" alt="提醒闹钟" />
-      </div>
-      <div class="remind-tip">您还没有添加任何上车提醒</div>
-      <div>
-        <button class="remind-add-btn">立刻添加</button>
+  <div>
+    <i-toast id="toast" />
+    <i-cell title="1号线" value="请选择以下站点"></i-cell>
+    <div>
+      <div class="search-card" v-on:click="toNext()">
+        <div class="card-title">
+          <i-icon type="label_fill" color="#fec84f" />
+          <p class="card-title-p">芙蓉站</p>
+          <div class="item-img">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    toNext() {
+      wx.navigateTo({
+        url: "/pages/busRemindThree/main"
+      });
+    }
+  }
+};
 </script>
 <style>
 page {
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
   height: 100%;
 }
 </style>
 <style scoped>
-.remind-container {
+.search-head {
+  align-items: center;
+  height: 80px;
+  display: flex;
+  margin: 20px 0 50px 0;
 }
-.remind-head {
-  height: 100px;
-  background-color: #fff;
-  line-height: 100px;
-  padding: 0 35px;
-}
-.remind-title {
-  font-size: 40px;
-  display: inline-block;
-}
-.remind-add {
-  color: #a3a3a3;
-  display: inline-block;
-  float: right;
-  font-weight: lighter;
-  font-size: 50px;
-}
-.remind-null {
-  position: absolute;
-  top: 30%;
-  width: 100%;
-}
-
-.img-clock {
-  text-align: center;
-}
-.img-clock img {
-  width: 320px;
-  height: 320px;
-}
-.remind-tip {
-  color: #a3a3a3;
-  margin-top: 30px;
+.search-head input {
+  height: 80px;
+  background-color: #fbfbfb;
+  border-radius: 50px;
   font-size: 30px;
-  text-align: center;
+  color: #a3a3a3;
+  margin: 0 30px 0 30px;
+  padding: 0 90px;
+  display: inline-block;
+  width: 90%;
 }
-.remind-add-btn {
+.search-head img {
+  position: absolute;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  padding: 0 60px;
+}
+.search-btn {
   margin: 0 auto;
-  margin-top: 30px;
-  width: 250px;
   height: 80px;
   font-size: 30px;
-  font-weight: normal;
-  background: #409eff;
+  background: #fec84f;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 50px;
   line-height: 80px;
-  border: 0px;
+  margin-right: 20px;
+  padding: 0 10px;
+  width: 160px;
+}
+button::after {
+  border: none;
+}
+.search-card {
+  background-color: #fff;
+  border-radius: 10px;
+  height: 80px;
+  padding: 10px 40px;
+  margin: 25px;
+}
+.search-card:active {
+  background-color: #f8f8f8;
+}
+.card-title {
+  line-height: 80px;
+  font-size: 35px;
+}
+.card-title-p {
+  margin-left: 25px;
+  display: inline-block;
+}
+.item-img {
+  display: inline-block;
+  float: right;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <i-message id="message" />
+    <i-toast id="toast" />
     <div class="search-head">
       <img
         src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png"
@@ -20,10 +20,10 @@
         </div>
       </div>
     </div>
-    <i-message id="message" />
   </div>
 </template>
 <script>
+const { $Toast } = require("../../../static/dist/base/index");
 import { mapActions, mapGetters } from "vuex";
 import store from "../../vuex/index";
 export default {
@@ -38,6 +38,14 @@ export default {
   methods: {
     ...mapActions("bus", ["SearchRoute"]),
     find() {
+      if (this.str == "") {
+        console.log(this.str);
+        $Toast({
+          content: "搜索内容不能为空",
+          type: "error"
+        });
+        return;
+      }
       this.SearchRoute(this.str);
       this.str = "";
     }
@@ -47,7 +55,7 @@ export default {
 </script>
 <style>
 page {
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
   height: 100%;
 }
 </style>
@@ -60,7 +68,7 @@ page {
 }
 .search-head input {
   height: 80px;
-  background-color: #efefef;
+  background-color: #fbfbfb;
   border-radius: 50px;
   font-size: 30px;
   color: #a3a3a3;

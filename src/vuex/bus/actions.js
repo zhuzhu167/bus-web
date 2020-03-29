@@ -4,7 +4,7 @@ import {
   getRMsg
 } from '@/api/bus'
 const {
-  $Message
+  $Toast
 } = require('../../../static/dist/base/index')
 // 查找公交线路
 export const SearchRoute = ({
@@ -15,7 +15,7 @@ export const SearchRoute = ({
       commit('SET_ROUTE_LIST', res.data.data)
       commit('SET_ROUTE_SHOW', true)
     } else {
-      $Message({
+      $Toast({
         content: '找不到线路',
         type: 'error'
       })
@@ -35,7 +35,7 @@ export const LessTransfer = ({
       commit('SET_TRANSFER_LIST', res.data.data)
       commit('SET_TRANSFER_SHOW', true)
     } else {
-      $Message({
+      $Toast({
         content: '找不到站点',
         type: 'error'
       })
@@ -53,7 +53,7 @@ export const GetRoutesMsg = ({
       commit('SET_SYNSTATIONLIST', res.data.data)
       commit('SET_SYNSTATION_SHOW', true)
     } else {
-      $Message({
+      $Toast({
         content: '周围没有站点',
         type: 'error'
       })

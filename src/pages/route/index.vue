@@ -1,6 +1,6 @@
 <template>
   <div>
-    <i-message id="message" />
+    <i-toast id="toast" />
     <div class="route-container">
       <div>
         <div class="route-title">路线</div>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+const { $Toast } = require("../../../static/dist/base/index");
 import { mapGetters, mapActions } from "vuex";
 import store from "../../vuex/index";
 export default {
@@ -54,6 +55,20 @@ export default {
       }
     },
     find() {
+      if (this.from == "") {
+        $Toast({
+          content: "出发点不能为空",
+          type: "error"
+        });
+        return;
+      }
+      if (this.to == "") {
+        $Toast({
+          content: "目的地不能为空",
+          type: "error"
+        });
+        return;
+      }
       let data = {
         start: this.from,
         end: this.to
@@ -69,7 +84,7 @@ export default {
 
 <style>
 page {
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
   height: 100%;
 }
 </style>
@@ -115,7 +130,7 @@ page {
   box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px 0px;
 }
 .exchange-icon:active {
-  background-color: #f1f1f1;
+  background-color: #f8f8f8;
 }
 .route-btn {
   margin: 0 auto;

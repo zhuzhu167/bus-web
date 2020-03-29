@@ -2,7 +2,10 @@
   <div class="card-container">
     <div class="card">
       <div class="card-title">
-        <div class="card-station">{{ station }}</div>
+        <div class="card-station">
+          <i-icon size="20" color="#fec84f" type="coordinates_fill" />
+          {{ station }}
+        </div>
         <div class="card-station-num">3个站点</div>
         <div class="card-station-distance">500m</div>
       </div>
@@ -12,7 +15,10 @@
         </div>
         <div class="two">
           <div class="destination">开往{{ item.startSta }}</div>
-          <div class="time">首{{ item.startT }}|末{{ item.endT }}</div>
+          <div class="time">
+            <i-icon size="15" color="#fec84f" type="time" />
+            首{{ item.startT }} | 末{{ item.endT }}
+          </div>
         </div>
       </div>
     </div>

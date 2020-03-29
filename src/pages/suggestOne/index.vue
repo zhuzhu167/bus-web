@@ -1,40 +1,25 @@
 <template>
   <div class="remind-container">
     <i-toast id="toast" />
-    <div class="remind-head">
-      <div class="remind-add" v-on:click="toNext()">
-        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-      </div>
-    </div>
-    <div v-if="IsRemind">
-      <i-panel title="闹钟列表">
-        <i-cell label="闹钟 6:00" title="1号线" value="芙蓉站"></i-cell>
-      </i-panel>
-    </div>
-    <div class="remind-null" v-if="!IsRemind">
-      <div class="img-clock">
-        <img src="../../../static/tabs/clock.png" alt="提醒闹钟" />
-      </div>
-      <div class="remind-tip">您还没有添加任何上车提醒</div>
-    </div>
+    <i-panel title="反馈">
+      <i-cell>
+        <textarea auto-height placeholder="请输入您的反馈信息" />
+      </i-cell>
+    </i-panel>
+    <i-button v-on:click="feedBack()" type="success" shape="circle" size="small">提交</i-button>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import store from "../../vuex/index";
 export default {
-  computed: {
-    ...mapGetters("user", ["IsRemind"])
-  },
   methods: {
-    toNext() {
-      wx.navigateTo({
-        url: "/pages/busRemindOne/main"
+    feedBack() {
+      $Toast({
+        content: "提交成功",
+        type: "success"
       });
     }
-  },
-  store
+  }
 };
 </script>
 <style>

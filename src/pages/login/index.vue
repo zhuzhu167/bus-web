@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <i-message id="message" />
+    <i-toast id="toast" />
     <div class="login-box">
       <div class="login-title">Hi，欢迎您回来</div>
       <div class="login-input">
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+const { $Toast } = require("../../../static/dist/base/index");
 import { mapActions } from "vuex";
 export default {
   data() {
@@ -32,6 +33,20 @@ export default {
       });
     },
     login() {
+      if (this.login == "") {
+        $Toast({
+          content: "账号不能为空",
+          type: "error"
+        });
+        return;
+      }
+      if (this.password == "") {
+        $Toast({
+          content: "密码不能为空",
+          type: "error"
+        });
+        return;
+      }
       let data = {
         loginName: this.loginName,
         password: this.password
@@ -79,7 +94,7 @@ page {
 .login-input input {
   height: 100px;
   border-radius: 10px;
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
   padding: 0 30px;
   font-size: 27px;
   margin-bottom: 30px;

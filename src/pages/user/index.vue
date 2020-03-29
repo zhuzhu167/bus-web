@@ -1,6 +1,6 @@
 <template>
   <div>
-    <i-message id="message" />
+    <i-toast id="toast" />
     <div class="user-login">
       <div class="login">
         <div v-if="!IsLogin">
@@ -80,7 +80,7 @@ export default {
 
 <style>
 page {
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
 }
 </style>
 <style scoped>
@@ -142,6 +142,6 @@ page {
   font-size: 26px;
 }
 .user-do-item:active {
-  background-color: #f1f1f1;
+  background-color: #f8f8f8;
 }
 </style>

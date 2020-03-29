@@ -1,6 +1,6 @@
 <template>
   <div>
-    <i-message id="message" />
+    <i-toast id="toast" />
     <div class="new-title">趣闻</div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 
 <style>
 page {
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
   height: 100%;
 }
 </style>

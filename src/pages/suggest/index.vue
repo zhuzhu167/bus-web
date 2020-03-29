@@ -1,9 +1,9 @@
 <template>
   <div class="suggest-container">
-    <i-message id="message" />
+    <i-toast id="toast" />
     <div class="card-title">快速反馈</div>
     <div class="msg-card">
-      <div class="msg-item">
+      <div class="msg-item" v-on:click="toFeedBack()">
         <div class="item-text">线路变更</div>
         <div class="item-img">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -93,11 +93,19 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    toFeedBack() {
+      wx.navigateTo({
+        url: "/pages/suggestOne/main"
+      });
+    }
+  }
+};
 </script>
 <style>
 page {
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
 }
 </style>
 <style scoped>
@@ -122,7 +130,7 @@ page {
   display: flex;
 }
 .msg-item:active {
-  background-color: #f1f1f1;
+  background-color: #f8f8f8;
 }
 .item-text {
   flex: 1;
@@ -144,7 +152,7 @@ page {
   line-height: 130px;
   text-align: center;
   font-size: 30px;
-  background-color: #409eff;
+  background-color: #fec84f;
   color: #fff;
 }
 </style>

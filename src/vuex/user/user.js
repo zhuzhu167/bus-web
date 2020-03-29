@@ -7,7 +7,8 @@ export default {
   state: {
     demo: 'user.js',
     is_login: true,
-    userName: ''
+    userName: '',
+    is_remind: false
   },
   actions,
   mutations,

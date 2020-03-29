@@ -1,6 +1,6 @@
 <template>
   <div class="index-container">
-    <i-message id="message" />
+    <i-toast id="toast" />
     <div class="index-search">
       <div class="index-position">{{ city_name }}</div>
       <div class="index-search-input">
@@ -107,7 +107,7 @@ export default {
 </script>
 <style>
 page {
-  background-color: #f8f8f8;
+  background-color: #f1f1f1;
   height: 100%;
 }
 </style>
