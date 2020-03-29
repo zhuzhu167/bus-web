@@ -1,5 +1,6 @@
 <template>
   <div class="login-container">
+    <i-message id="message" />
     <div class="login-box">
       <div class="login-title">Hi，欢迎您回来</div>
       <div class="login-input">

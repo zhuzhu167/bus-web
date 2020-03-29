@@ -1,5 +1,6 @@
 <template>
   <div>
+    <i-message id="message" />
     <div class="search-head">
       <img
         src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png"
@@ -19,6 +20,7 @@
         </div>
       </div>
     </div>
+    <i-message id="message" />
   </div>
 </template>
 <script>

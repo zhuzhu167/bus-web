@@ -1,5 +1,6 @@
 <template>
   <div>
+    <i-message id="message" />
     <div class="new-title">趣闻</div>
   </div>
 </template>

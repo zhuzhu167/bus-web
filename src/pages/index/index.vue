@@ -1,5 +1,6 @@
 <template>
   <div class="index-container">
+    <i-message id="message" />
     <div class="index-search">
       <div class="index-position">{{ city_name }}</div>
       <div class="index-search-input">

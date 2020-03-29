@@ -1,5 +1,6 @@
 <template>
   <div>
+    <i-message id="message" />
     <div class="user-login">
       <div class="login">
         <div v-if="!IsLogin">

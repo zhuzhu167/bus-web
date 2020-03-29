@@ -1,5 +1,6 @@
 <template>
   <div class="register-container">
+    <i-message id="message" />
     <div class="register-box">
       <div class="register-title">Hi，欢迎加入我们</div>
       <div class="register-input">

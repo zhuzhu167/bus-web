@@ -1,5 +1,6 @@
 <template>
   <div>
+    <i-message id="message" />
     <div class="route-container">
       <div>
         <div class="route-title">路线</div>

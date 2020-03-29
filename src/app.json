@@ -6,12 +6,21 @@
     "pages/user/main",
     "pages/search/main",
     "pages/busRemind/main",
+    "pages/busRemindOne/main",
+    "pages/busRemindTwo/main",
+    "pages/busRemindThree/main",
     "pages/suggest/main",
     "pages/set/main",
     "pages/login/main",
     "pages/register/main",
     "pages/like/main"
   ],
+  "usingComponents": {
+    "i-input": "../../../static/dist/input/index",
+    "i-button": "../../../static/dist/button/index",
+    "i-message": "../../../static/dist/message/index",
+    "i-panel": "../static/dist/panel/index"
+  },
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"

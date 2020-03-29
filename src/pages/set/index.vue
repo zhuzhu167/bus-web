@@ -1,5 +1,6 @@
 <template>
   <div class="set-container">
+    <i-message id="message" />
     <div class="set-card">
       <div class="set-item">
         <div class="item-text">关于我们</div>

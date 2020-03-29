@@ -1,5 +1,6 @@
 <template>
   <div class="suggest-container">
+    <i-message id="message" />
     <div class="card-title">快速反馈</div>
     <div class="msg-card">
       <div class="msg-item">
