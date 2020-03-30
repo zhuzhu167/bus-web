@@ -26,19 +26,19 @@
           end="21:01"
           @change="setStart"
         >
-          <view class="picker">{{ start }}</view>
+          <view class="picker">{{ start?start:'请选择' }}</view>
         </picker>
       </i-cell>
       <i-cell title="结束时间">
         <picker slot="footer" mode="time" :value="end" start="09:01" end="21:01" @change="setEnd">
-          <view class="picker">{{ end }}</view>
+          <view class="picker">{{ end?end:'请选择' }}</view>
         </picker>
       </i-cell>
       <i-cell title="提醒多辆">
         <switch slot="footer" checked color="#fec84f" />
       </i-cell>
     </i-cell-group>
-    <i-button v-on:click="setClock()" type="success" shape="circle" size="small">确定</i-button>
+    <i-button @click="setClock()" type="success" shape="circle" size="small">确定</i-button>
   </div>
 </template>
 
@@ -56,8 +56,8 @@ export default {
       distance: "",
       minute: "",
       distancelist: ["即将到站", "500米", "1公里"],
-      start: "请选择",
-      end: "请选择"
+      start: "",
+      end: ""
     };
   },
   onLoad(options) {
@@ -66,12 +66,7 @@ export default {
     this.nextStation = options.nextStation;
   },
   onUnload() {
-    var pages = getCurrentPages();
-    var prevPage = pages[pages.length - 2]; //上一个页面
-    //直接调用上一个页面的setData()方法，把数据存到上一个页面中去
-    prevPage.setData({
-      busNum: this.busNum
-    });
+    Object.assign(this.$data, this.$options.data());
   },
   computed: {
     ...mapGetters("user", ["IsRemind"])
@@ -84,10 +79,6 @@ export default {
         itemList: ["即将到站", "500米", "1公里"],
         success(res) {
           that.distance = that.distancelist[res.tapIndex];
-          console.log(that.distance);
-        },
-        fail(res) {
-          console.log(res.errMsg);
         }
       });
     },
@@ -98,7 +89,14 @@ export default {
       this.end = event.mp.detail.value;
     },
     setClock() {
-      if (this.distance != "") {
+      if (
+        this.busNumthis != "" &&
+        this.station != "" &&
+        this.distance != "" &&
+        this.minute != "" &&
+        this.start != "" &&
+        this.end != ""
+      ) {
         let data = {
           busNum: this.busNum,
           station: this.station,

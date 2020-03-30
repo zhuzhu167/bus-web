@@ -13,16 +13,19 @@
       </div>
     </div>
     <div class="user-do-list">
-      <div class="user-do-item" v-on:click="toUrl('clock')">
+      <div class="user-do-item" @click="toUrlneedLogin('clock')">
         <img src="../../../static/tabs/clock.png" />上车提醒
       </div>
-      <div class="user-do-item" v-on:click="toUrl('like')">
+      <div class="user-do-item" @click="toUrlneedLogin('like')">
         <img src="../../../static/tabs/good.png" />好评鼓励
       </div>
-      <div class="user-do-item" v-on:click="toUrl('suggest')">
+      <div class="user-do-item" @click="toUrlneedLogin('lost')">
+        <img src="../../../static/tabs/lost.png" />失物招领
+      </div>
+      <div class="user-do-item" @click="toUrlneedLogin('suggest')">
         <img src="../../../static/tabs/text.png" />帮助与反馈
       </div>
-      <div class="user-do-item" v-on:click="toUrl('set')">
+      <div class="user-do-item" @click="toUrlneedLogin('set')">
         <img src="../../../static/tabs/set.png" />设置
       </div>
     </div>
@@ -40,17 +43,28 @@ export default {
         clock: "/pages/busRemind/main",
         suggest: "/pages/suggest/main",
         set: "/pages/set/main",
-        like: "/pages/like/main"
+        like: "/pages/like/main",
+        lost: "/pages/lost/main"
       },
       isClicked: false
     };
+  },
+  created() {
+    this.isLogin();
   },
   computed: {
     ...mapGetters("user", ["IsLogin", "UserName"])
   },
   methods: {
+    ...mapActions("user", ["CheckLogin"]),
+    // 判断是否登录
+    isLogin() {
+      if (wx.getStorageSync("loginName") != "") {
+        this.CheckLogin(wx.getStorageSync("userName"));
+      }
+    },
     // 控制页面跳转
-    toUrl(url) {
+    toUrlneedLogin(url) {
       if (this.IsLogin) {
         let _this = this;
         this.isClicked = true;
@@ -67,6 +81,16 @@ export default {
           duration: 2000
         });
       }
+    },
+    toUrl() {
+      let _this = this;
+      this.isClicked = true;
+      wx.navigateTo({
+        url: this.urlList[url]
+      });
+      setTimeout(function() {
+        _this.isClicked = false;
+      }, 50);
     },
     toLogin() {
       wx.navigateTo({

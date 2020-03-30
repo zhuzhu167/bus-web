@@ -8,7 +8,7 @@
     <i-cell title="公交号码">
       <input slot="footer" v-model="num" class="weui-input" placeholder="必填项" />
     </i-cell>
-    <i-button v-on:click="like()" type="success" shape="circle" size="small">点赞</i-button>
+    <i-button @click="like()" type="success" shape="circle" size="small">点赞</i-button>
   </div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
         let data = {
           like_carNum: this.num,
           like_route: this.route,
-          userid: "liangzhu167"
+          userid: wx.getStorageSync("loginName")
         };
         this.Like(data);
         this.route = "";

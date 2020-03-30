@@ -10,10 +10,14 @@
     "pages/busRemindTwo/main",
     "pages/busRemindThree/main",
     "pages/suggest/main",
+    "pages/suggestOne/main",
+    "pages/suggestTwo/main",
+    "pages/suggestMy/main",
     "pages/set/main",
     "pages/login/main",
     "pages/register/main",
-    "pages/like/main"
+    "pages/like/main",
+    "pages/lost/main"
   ],
   "usingComponents": {
     "i-input": "../../../static/dist/input/index",
@@ -24,7 +28,9 @@
     "i-cell": "../static/dist/cell/index",
     "i-icon": "../static/dist/icon/index",
     "i-switch": "../static/dist/switch/index",
-    "i-load-more": "../static/dist/load-more/index"
+    "i-load-more": "../static/dist/load-more/index",
+    "i-action-sheet": "../static/dist/action-sheet/index",
+    "i-card": "../static/dist/card/index"
   },
   "permission": {
     "scope.userLocation": {

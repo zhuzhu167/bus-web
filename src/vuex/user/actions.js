@@ -2,7 +2,9 @@ import {
   aUser,
   fUser,
   like,
-  userF
+  userF,
+  findL,
+  myF
 } from '@/api/user'
 const {
   $Toast
@@ -24,6 +26,8 @@ export const Register = ({
       })
       commit('LOGIN', true)
       commit('SET_USERNAME', data.userName)
+      wx.setStorageSync('loginName', data.loginName)
+      wx.setStorageSync('userId', data.userName)
     } else {
       $Toast({
         content: res.data.msg,
@@ -32,12 +36,18 @@ export const Register = ({
     }
   })
 }
+// 是否登录
+export const CheckLogin = ({
+  commit
+}, data) => {
+  commit('LOGIN', true)
+  commit('SET_USERNAME', data)
+}
 // 登录
 export const Login = ({
   commit
 }, data) => {
   fUser(data).then(res => {
-    console.log(res)
     if (res.data.status === 200) {
       wx.switchTab({
         url: '/pages/user/main',
@@ -49,7 +59,9 @@ export const Login = ({
         }
       })
       commit('LOGIN', true)
-      commit('SET_USERNAME', res.data.data)
+      commit('SET_USERNAME', res.data.data.userName)
+      wx.setStorageSync('loginName', res.data.data.loginName)
+      wx.setStorageSync('userName', res.data.data.userName)
     } else {
       $Toast({
         content: res.data.msg,
@@ -57,16 +69,6 @@ export const Login = ({
       })
     }
   })
-}
-// 设置提醒
-export const SetRemind = ({
-  commit
-}, data) => {
-  $Toast({
-    content: '设置成功',
-    type: 'success'
-  })
-  commit('SET_ISREMIND', data)
 }
 // 点赞
 export const Like = ({
@@ -109,6 +111,26 @@ export const FeedBack = ({
     }
   })
 }
+// 我的反馈
+export const GetMyFeedback = ({
+  commit
+}, data) => {
+  myF(data).then(res => {
+    if (res.data.status === 200) {
+      commit('SET_MYFEEDBACK', res.data.data)
+    }
+  })
+}
+// 获取闹钟列表
+export const GetClockList = ({
+  commit
+}, data) => {
+  if (wx.getStorageSync('clockList')) {
+    let arr = wx.getStorageSync('clockList')
+    commit('SET_ISREMIND', true)
+    commit('SET_CLOCKLIST', arr)
+  }
+}
 // 设置闹钟
 export const SetClock = ({
   commit
@@ -122,6 +144,22 @@ export const SetClock = ({
       })
     }
   })
+  let arr = []
+  if (wx.getStorageSync('clockList')) {
+    arr = arr.concat(wx.getStorageSync('clockList'))
+  }
+  arr.push(data)
   commit('SET_ISREMIND', true)
-  commit('SET_CLOCK', data)
+  commit('SET_CLOCKLIST', arr)
+  wx.setStorageSync('clockList', arr)
+}
+// 查找失物
+export const GetLost = ({
+  commit
+}, data) => {
+  findL().then(res => {
+    if (res.data.status === 200) {
+      commit('SET_LOSTLIST', res.data.data)
+    }
+  })
 }

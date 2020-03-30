@@ -39,7 +39,6 @@ export default {
     ...mapActions("bus", ["SearchRoute"]),
     find() {
       if (this.str == "") {
-        console.log(this.str);
         $Toast({
           content: "搜索内容不能为空",
           type: "error"

@@ -5,7 +5,7 @@
     <div>
       <div
         class="search-card"
-        v-on:click="toNext(item,StationList[index+1])"
+        @click="toNext(item,StationList[index+1])"
         v-for="(item,index) in StationList"
         :key="index"
       >

@@ -45,11 +45,7 @@ export default {
   created() {
     this.demo();
   },
-  methods: {
-    demo() {
-      console.log(this.route);
-    }
-  }
+  methods: {}
 };
 </script>
 

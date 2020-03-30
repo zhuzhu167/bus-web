@@ -7,7 +7,7 @@
         <textarea v-model="suggest" auto-height placeholder="请输入您的反馈信息" />
       </i-cell>
     </i-panel>
-    <i-button v-on:click="feedBack()" type="success" shape="circle" size="small">提交</i-button>
+    <i-button @click="feedBack()" type="success" shape="circle" size="small">提交</i-button>
   </div>
 </template>
 
@@ -31,10 +31,11 @@ export default {
   methods: {
     ...mapActions("user", ["FeedBack"]),
     feedBack() {
-      if (this.msg != "") {
+      if (this.suggest != "") {
+        let userid = wx.getStorageSync("loginName");
         let data = {
           content: this.suggest,
-          userid: "liangzhu167"
+          userid: userid
         };
         this.FeedBack(data);
       } else {

@@ -87,7 +87,7 @@
     </div>
     <div class="submit">
       <div class="submit-btn">意见反馈</div>
-      <div class="submit-btn">我的反馈</div>
+      <div class="submit-btn" @click="toMySuggest()">我的反馈</div>
     </div>
   </div>
 </template>
@@ -103,6 +103,11 @@ export default {
     toHelp(msg) {
       wx.navigateTo({
         url: "/pages/suggestTwo/main?msg=" + msg
+      });
+    },
+    toMySuggest() {
+      wx.navigateTo({
+        url: "/pages/suggestMy/main"
       });
     }
   }

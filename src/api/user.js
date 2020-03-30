@@ -34,6 +34,11 @@ export const userF = (data) => _axios({
   data
 })
 
+export const myF = (data) => _axios({
+  url: `/user/myFeedback?id=${data}`,
+  method: 'get'
+})
+
 export const findL = () => _axios({
   url: `/user/findLost`,
   method: 'get'
