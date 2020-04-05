@@ -8,7 +8,7 @@ instance.defaults.adapter = function (config) {
   return new Promise((resolve, reject) => {
     // wx小程序 发起请求相应 log 就可以看到熟悉的返回啦
     wx.request({
-      url: 'http://localhost:8080' + config.url,
+      url: 'http://47.100.31.104:8080/busserver' + config.url,
       method: config.method,
       data: config.data,
       success: (res) => {
