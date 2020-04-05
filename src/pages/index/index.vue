@@ -42,7 +42,7 @@ export default {
       cardToggle: true,
       markersData: {
         latitude: "", //纬度
-        longitude: "", //经度
+        longitude: "", //经度123
         key: "94d4bb757ed3cc2656b8f91e03665b0f" //申请的高德地图key（申请的web key）
       },
       gpsCode: "",
