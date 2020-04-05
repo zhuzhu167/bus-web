@@ -35,6 +35,7 @@ import StationCard from "@/components/stationCard";
 import amap from "amap-wx";
 import { mapGetters, mapActions } from "vuex";
 import store from "../../vuex/index";
+const { $Toast } = require("../../../static/dist/base/index");
 export default {
   data() {
     return {
@@ -49,7 +50,8 @@ export default {
       place: "芙蓉园"
     };
   },
-  created() {
+  created() {},
+  onLoad() {
     this.getLocation();
     this.GetRoutesMsg(this.place);
   },
@@ -69,6 +71,12 @@ export default {
           let latitude = res.latitude; //维度
           let longitude = res.longitude; //经度
           that.loadCity(latitude, longitude); //调用高德
+        },
+        fail: function(res) {
+          $Toast({
+            content: "请打开GPS定位",
+            type: "error"
+          });
         }
       });
     },
