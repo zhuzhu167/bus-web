@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container">
+  <div class="card-container fadeInDown">
     <div class="card">
       <div class="card-title">
         <div class="card-station">
@@ -41,11 +41,7 @@ export default {
     return {
       arr: []
     };
-  },
-  created() {
-    this.demo();
-  },
-  methods: {}
+  }
 };
 </script>
 
