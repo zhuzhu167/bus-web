@@ -11,7 +11,7 @@
       <button class="search-btn" @click="search()">搜索</button>
     </div>
     <div>
-      <div class="search-card" @click="toNext()" v-if="RouteIsShow">
+      <div class="search-card fadeIn" @click="toNext()" v-if="RouteIsShow">
         <div class="card-title">
           <p class="title-route">{{ RouteList.rname }}</p>
           <div class="item-img">

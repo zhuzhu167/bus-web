@@ -1,5 +1,6 @@
 <template>
-  <div class="lost-box">
+  <div class="lost-box fadeIn">
+    <i-toast id="toast" />
     <i-card
       :extra="item.title"
       :title="item.losttime"

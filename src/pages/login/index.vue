@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <i-toast id="toast" />
-    <div class="login-box">
+    <div class="login-box fadeIn">
       <div class="login-title">Hi，欢迎您回来</div>
       <div class="login-input">
         <input type="text" v-model="loginName" placeholder="账号" />

@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="user-do-list">
+    <div class="user-do-list fadeIn">
       <div class="user-do-item" @click="toUrlneedLogin('clock')">
         <img src="../../../static/tabs/clock.png" />上车提醒
       </div>

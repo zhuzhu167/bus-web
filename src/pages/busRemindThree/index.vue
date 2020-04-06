@@ -1,5 +1,5 @@
 <template>
-  <div class="remind-container">
+  <div class="remind-container fadeIn">
     <i-toast id="toast" />
     <i-cell-group>
       <i-cell :label="busNum+' 号线'" :title="'下一站为：'+nextStation" :value="station"></i-cell>
@@ -22,15 +22,15 @@
           slot="footer"
           mode="time"
           :value="start"
-          start="09:01"
-          end="21:01"
+          start="06:00"
+          end="22:00"
           @change="setStart"
         >
           <view class="picker">{{ start?start:'请选择' }}</view>
         </picker>
       </i-cell>
       <i-cell title="结束时间">
-        <picker slot="footer" mode="time" :value="end" start="09:01" end="21:01" @change="setEnd">
+        <picker slot="footer" mode="time" :value="end" start="06:01" end="22:00" @change="setEnd">
           <view class="picker">{{ end?end:'请选择' }}</view>
         </picker>
       </i-cell>

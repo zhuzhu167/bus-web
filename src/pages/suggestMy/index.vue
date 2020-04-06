@@ -1,5 +1,6 @@
 <template>
-  <div class="lost-box">
+  <div class="lost-box fadeIn">
+    <i-toast id="toast" />
     <i-card :title="item.atime" v-for="(item,index) in MyFeedbackList" :key="index">
       <view slot="content">{{ item.content }}</view>
     </i-card>

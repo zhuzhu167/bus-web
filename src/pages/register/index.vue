@@ -1,7 +1,7 @@
 <template>
   <div class="register-container">
     <i-toast id="toast" />
-    <div class="register-box">
+    <div class="register-box fadeIn">
       <div class="register-title">Hi，欢迎加入我们</div>
       <div class="register-input">
         <input type="text" v-model="loginName" placeholder="账号" />

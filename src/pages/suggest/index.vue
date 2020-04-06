@@ -1,5 +1,6 @@
 <template>
-  <div class="suggest-container">
+  <div class="suggest-container fadeIn">
+    <i-toast id="toast" />
     <i-toast id="toast" />
     <div class="card-title">快速反馈</div>
     <div class="msg-card">

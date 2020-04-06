@@ -1,5 +1,5 @@
 <template>
-  <div class="remind-container">
+  <div class="remind-container fadeIn">
     <i-toast id="toast" />
     <div class="card-title">关于{{ msg }}的反馈</div>
     <i-panel>

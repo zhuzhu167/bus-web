@@ -2,9 +2,12 @@
   "pages": [
     "pages/index/main",
     "pages/route/main",
+    "pages/routeStations/main",
     "pages/news/main",
     "pages/user/main",
     "pages/search/main",
+    "pages/searchStations/main",
+    "pages/searchRoute/main",
     "pages/busRemind/main",
     "pages/busRemindOne/main",
     "pages/busRemindTwo/main",
@@ -17,7 +20,8 @@
     "pages/login/main",
     "pages/register/main",
     "pages/like/main",
-    "pages/lost/main"
+    "pages/lost/main",
+    "pages/station/main"
   ],
   "usingComponents": {
     "i-input": "../../../static/dist/input/index",
@@ -30,7 +34,11 @@
     "i-switch": "../static/dist/switch/index",
     "i-load-more": "../static/dist/load-more/index",
     "i-action-sheet": "../static/dist/action-sheet/index",
-    "i-card": "../static/dist/card/index"
+    "i-card": "../static/dist/card/index",
+    "i-index": "../static/dist/index/index",
+    "i-index-item": "../static/dist/index-item/index",
+    "i-steps": "../static/dist/steps/index",
+    "i-step": "../static/dist/step/index"
   },
   "permission": {
     "scope.userLocation": {

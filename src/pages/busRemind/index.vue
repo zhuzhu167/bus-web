@@ -6,7 +6,7 @@
         <i class="fa fa-plus-square-o" aria-hidden="true"></i>
       </div>
     </div>
-    <div v-if="IsRemind">
+    <div v-if="!isRemind">
       <i-panel title="闹钟列表">
         <div class="clock-box" v-for="(item,index) in ClockList" :key="index">
           <div class="box-left">
@@ -23,7 +23,7 @@
         </div>
       </i-panel>
     </div>
-    <div class="remind-null" v-if="!IsRemind">
+    <div class="remind-null" v-if="isRemind">
       <div class="img-clock">
         <img src="../../../static/tabs/clock.png" alt="提醒闹钟" />
       </div>
@@ -41,7 +41,14 @@ export default {
     this.GetClockList();
   },
   computed: {
-    ...mapGetters("user", ["IsRemind", "ClockList"])
+    ...mapGetters("user", ["ClockList"]),
+    isRemind() {
+      if (this.ClockList.length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   methods: {
     ...mapActions("user", ["GetClockList"]),

@@ -4,7 +4,7 @@
     <i-cell :title="busNum + ' 号线'" value="请选择以下站点"></i-cell>
     <div>
       <div
-        class="search-card"
+        class="search-card fadeIn"
         @click="toNext(item,StationList[index+1])"
         v-for="(item,index) in StationList"
         :key="index"

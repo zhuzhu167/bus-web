@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container fadeInDown">
+  <div class="card-container fadeIn">
     <div class="card">
       <div class="card-title">
         <div class="card-station">
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import store from "../vuex/index";
 export default {
   props: {
     route: {
@@ -34,18 +36,14 @@ export default {
     },
     station: {
       type: String,
-      default: "未知"
+      default: ""
     }
   },
-  data() {
-    return {
-      arr: []
-    };
-  }
+  store
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   background-color: #fff;
   border-radius: 10px;
@@ -83,7 +81,7 @@ export default {
   display: flex;
   padding: 0 50px;
   height: 90px;
-  line-height: 90px;
+  line-height: 120px;
   font-size: 35px;
 }
 .from-to {

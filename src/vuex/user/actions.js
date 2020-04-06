@@ -106,7 +106,7 @@ export const FeedBack = ({
     } else {
       $Toast({
         content: '反馈失败',
-        type: 'success'
+        type: 'error'
       })
     }
   })

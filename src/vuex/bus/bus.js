@@ -5,7 +5,7 @@ import * as getters from './getters'
 export default {
   namespaced: true,
   state: {
-    demo: 'bus.js',
+    place: '芙蓉园',
     // 线路查询
     routeList: {},
     routeIsShow: false,
@@ -16,7 +16,8 @@ export default {
     synsStationList: [],
     synsStationShow: false,
     // 站点列表
-    stationList: []
+    stationList: [],
+    stationShow: false
   },
   actions,
   mutations,

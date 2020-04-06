@@ -2,7 +2,7 @@
   <div class="index-container">
     <i-toast id="toast" />
     <div class="index-search">
-      <div class="index-position">{{ city_name }}</div>
+      <div class="index-position" @click="toSelect()">{{ city_name }}</div>
       <div class="index-search-input">
         <div @click="toSearch()" class="input">搜索公交线路，车站</div>
       </div>
@@ -21,8 +21,8 @@
         >历史线路</div>
       </div>
       <div class="index-card-list" v-show="cardToggle">
-        <div v-if="SynsStationShow">
-          <StationCard :route="SynsStationList" :station="place"></StationCard>
+        <div v-if="SynsStationShow" class="fadeInDown">
+          <StationCard :route="SynsStationList" :station="Place"></StationCard>
         </div>
       </div>
       <div v-show="cardToggle"></div>
@@ -46,17 +46,18 @@ export default {
         key: "94d4bb757ed3cc2656b8f91e03665b0f" //申请的高德地图key（申请的web key）
       },
       gpsCode: "",
-      city_name: "正在定位",
-      place: "芙蓉园"
+      city_name: "正在定位"
     };
   },
-  created() {},
-  onLoad() {
+  created() {
     this.getLocation();
-    this.GetRoutesMsg(this.place);
+    this.GetRoutesMsg(this.Place);
+  },
+  onShow() {
+    this.GetRoutesMsg(this.Place);
   },
   computed: {
-    ...mapGetters("bus", ["SynsStationList", "SynsStationShow"])
+    ...mapGetters("bus", ["SynsStationList", "SynsStationShow", "Place"])
   },
   methods: {
     ...mapActions("bus", ["GetRoutesMsg"]),
@@ -68,8 +69,8 @@ export default {
         type: "gcj02",
         //返回可以用于wx.openLocation的经纬度
         success: function(res) {
-          let latitude = res.latitude; //维度
-          let longitude = res.longitude; //经度
+          let latitude = 23.37538111; //res.latitude; //维度
+          let longitude = 116.7096044; //res.longitude; //经度
           that.loadCity(latitude, longitude); //调用高德
         },
         fail: function(res) {
@@ -84,15 +85,13 @@ export default {
     loadCity(latitude, longitude) {
       var that = this;
       var myAmapFun = new amap.AMapWX({ key: that.markersData.key });
-
       myAmapFun.getRegeo({
         location: "" + longitude + "," + latitude + "", //location的格式为'经度,纬度'
         success: function(data) {
           var cityCode = data[0].regeocodeData.addressComponent.adcode; //获取城市code
           that.gpsCode = cityCode;
           that.city_name = data[0].regeocodeData.addressComponent.city; //获取
-        },
-        fail: function(info) {}
+        }
       });
     },
     //跳转
@@ -105,6 +104,11 @@ export default {
       if (this.cardToggleFn != bol) {
         this.cardToggle = bol;
       }
+    },
+    toSelect() {
+      wx.navigateTo({
+        url: "/pages/station/main"
+      });
     }
   },
   components: {
@@ -149,8 +153,6 @@ page {
   font-size: 25px;
   color: #a3a3a3;
   text-align: center;
-}
-.index-context {
 }
 .index-select {
   height: 80px;

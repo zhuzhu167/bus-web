@@ -19,12 +19,25 @@
       <div class="common-title">常用地点</div>
       <div class="common-context"></div>
     </div>
-    <div v-if="TransferIsShow" class="route-card">
-      <div class="card">
-        <div class="card-title">{{ start }} -> {{ end }}</div>
-        <div class="card-context">
-          坐{{ TransferList[0] }}号线，在{{ TransferList[2] }}站转
-          {{ TransferList[1] }}号线
+    <div v-if="TransferIsShow" class="route-card fadeIn">
+      <div class="card" @click="getDetailStationT()">
+        <div class="card-left">
+          <div class="card-title">
+            {{ start }}
+            <i-icon type="enterinto_fill" color="#fec84f" />
+            {{ end }}
+          </div>
+          <div class="card-context">
+            坐 {{ TransferList[0] }}
+            <p style="display:inline-block" v-if="TransferList[2]!=null&&TransferList[2]!=''">
+              号线，在{{ TransferList[2] }}站 
+              <p style="display:inline-block;color:#fec84f"> 转</p> 
+              {{ TransferList[1] }} 号线
+            </p>
+          </div>
+        </div>
+        <div class="card-right">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
     </div>
@@ -48,7 +61,11 @@ export default {
     ...mapGetters("bus", ["TransferList", "TransferIsShow"])
   },
   methods: {
-    ...mapActions("bus", ["LessTransfer"]),
+    ...mapActions("bus", [
+      "LessTransfer",
+      "GetSEStationsTran",
+      "GetSEStations"
+    ]),
     exchangeFromTo() {
       let temp = "";
       if (this.from != "" && this.to != "") {
@@ -79,6 +96,31 @@ export default {
       this.LessTransfer(data);
       this.start = this.from;
       this.end = this.to;
+    },
+    getDetailStationT() {
+      if (this.TransferList[2] != "") {
+        let data = {
+          sta: this.start,
+          end: this.end,
+          tran: this.TransferList[2],
+          rid: this.TransferList[0],
+          ridTran: this.TransferList[1]
+        };
+        this.GetSEStationsTran(data);
+        wx.navigateTo({
+          url: "/pages/routeStations/main"
+        });
+      } else {
+        let data = {
+          sta: this.start,
+          end: this.end,
+          rid: this.TransferList[0]
+        };
+        this.GetSEStations(data);
+        wx.navigateTo({
+          url: "/pages/routeStations/main"
+        });
+      }
     }
   },
   store
@@ -124,7 +166,7 @@ page {
   transform: rotate(90deg);
   font-size: 35px;
   color: #fec84f;
-  border-radius: 80rpx;
+  border-radius: 80px;
   background-color: #fff;
   width: 80px;
   height: 80px;
@@ -150,24 +192,24 @@ button::after {
   border: none;
 }
 .route-card {
-  padding: 20rpx 25rpx;
+  padding: 20px 25px;
 }
 .card {
-  height: 200rpx;
+  height: 200px;
   background-color: #fff;
-  border-radius: 10rpx;
-  padding: 0 35rpx;
+  border-radius: 10px;
+  padding: 0 35px;
 }
 .card-title {
-  height: 110rpx;
-  line-height: 110rpx;
-  font-size: 37rpx;
+  height: 110px;
+  line-height: 135px;
+  font-size: 37px;
 }
 .card-context {
-  height: 90rpx;
-  line-height: 90rpx;
+  height: 90px;
+  line-height: 55px;
   color: #a8a8a8;
-  font-size: 32rpx;
+  font-size: 32px;
 }
 .common-location {
   padding: 20px 0 20px 30px;
@@ -178,5 +220,14 @@ button::after {
 }
 .common-context {
   height: 500px;
+}
+.card-left {
+  display: inline-block;
+}
+.card-right {
+  float: right;
+  display: inline-block;
+  height: 100%;
+  line-height: 200px;
 }
 </style>

@@ -1,10 +1,17 @@
 import axios from 'axios'
-
+const {
+  $Toast
+} = require('../../static/dist/base/index')
 var instance = axios.create( // 常见请求实例配置项
   {
-    baseURL: 'http://localhost:8080' // 基础URL
+    baseURL: '' // 基础URL
   })
 instance.defaults.adapter = function (config) {
+  $Toast({
+    content: '加载中',
+    type: 'loading',
+    duration: 0
+  })
   return new Promise((resolve, reject) => {
     // wx小程序 发起请求相应 log 就可以看到熟悉的返回啦
     wx.request({
@@ -12,9 +19,14 @@ instance.defaults.adapter = function (config) {
       method: config.method,
       data: config.data,
       success: (res) => {
+        $Toast.hide()
         return resolve(res)
       },
       fail: (err) => {
+        $Toast({
+          content: '请求失败',
+          type: 'error'
+        })
         return reject(err)
       }
     })
@@ -36,8 +48,7 @@ instance.interceptors.request.use(
 
 // 添加响应拦截器
 instance.interceptors.response.use(
-  function (response) {
-    console.log(response.data.data) // 响应成功
+  function (response) { // 响应成功
     return response
   },
   function (error) {

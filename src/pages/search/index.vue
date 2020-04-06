@@ -7,16 +7,39 @@
         alt
       />
 
-      <input type="text" v-model="str" placeholder="搜索公交线路，车站，地点" />
+      <input type="text" v-model="str" placeholder="搜索公交线路，车站" />
       <button class="search-btn" @click="find()">搜索</button>
     </div>
     <div v-if="RouteIsShow">
-      <div class="search-card">
-        <div class="card-title">{{ RouteList.rname }}</div>
-        <div class="item-list">
-          <p class="card-item">始班：{{ RouteList.startT }}</p>
-          <p class="card-item">末班：{{ RouteList.endT }}</p>
-          <p class="card-item">票价：{{ RouteList.charge }}元</p>
+      <div class="search-card fadeIn" @click="getStationDetail(str)">
+        <div class="card-left">
+          <div class="card-title">{{ RouteList.rname }}</div>
+          <div class="item-list">
+            <p class="card-item">始班：{{ RouteList.startT }}</p>
+            <p class="card-item">末班：{{ RouteList.endT }}</p>
+            <p class="card-item">票价：{{ RouteList.charge }}元</p>
+          </div>
+        </div>
+        <div class="card-right">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+    <div v-if="StationShow">
+      <div
+        class="search-card fadeIn"
+        v-for="(item,index) in StationList"
+        :key="index"
+        @click="getRouteDetail(item.sname)"
+      >
+        <div class="card-left">
+          <div class="card-title">{{ item.sname }} 站</div>
+          <div class="item-list">
+            <p class="card-item">经过线路：{{ item.rid }} 号</p>
+          </div>
+        </div>
+        <div class="card-right">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
     </div>
@@ -24,7 +47,7 @@
 </template>
 <script>
 const { $Toast } = require("../../../static/dist/base/index");
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import store from "../../vuex/index";
 export default {
   data() {
@@ -33,10 +56,21 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("bus", ["RouteList", "RouteIsShow"])
+    ...mapGetters("bus", [
+      "RouteList",
+      "RouteIsShow",
+      "StationShow",
+      "StationList"
+    ])
   },
   methods: {
-    ...mapActions("bus", ["SearchRoute"]),
+    ...mapMutations("bus", [
+      "SET_ROUTE_LIST",
+      "SET_ROUTE_SHOW",
+      "SET_STATIONLIST",
+      "SET_STATION_SHOW"
+    ]),
+    ...mapActions("bus", ["SearchRoute", "GetXStations"]),
     find() {
       if (this.str == "") {
         $Toast({
@@ -45,9 +79,33 @@ export default {
         });
         return;
       }
-      this.SearchRoute(this.str);
-      this.str = "";
+      if (!isNaN(parseInt(this.str))) {
+        this.SET_STATIONLIST([]);
+        this.SET_STATION_SHOW(false);
+        this.SearchRoute(this.str);
+      } else if (typeof this.str == "string") {
+        this.SET_ROUTE_LIST([]);
+        this.SET_ROUTE_SHOW(false);
+        this.GetXStations(this.str);
+      }
+    },
+    getStationDetail(id) {
+      wx.navigateTo({
+        url: "/pages/searchStations/main?id=" + id
+      });
+    },
+    getRouteDetail(station) {
+      wx.navigateTo({
+        url: "/pages/searchRoute/main?station=" + station
+      });
     }
+  },
+  onUnload() {
+    this.SET_STATIONLIST([]);
+    this.SET_STATION_SHOW(false);
+    this.SET_ROUTE_SHOW(false);
+    this.SET_ROUTE_LIST([]);
+    this.str = "";
   },
   store
 };
@@ -103,11 +161,14 @@ button::after {
   border-radius: 10px;
   height: 180px;
   padding: 10px 40px;
-  margin: 25px;
+  margin: 0 25px 25px 25px;
+}
+.search-card:active {
+  background-color: #f8f8f8;
 }
 .card-title {
   height: 90px;
-  line-height: 90px;
+  line-height: 120px;
   font-size: 35px;
 }
 .item-list {
@@ -119,5 +180,14 @@ button::after {
 .card-item {
   margin-right: 30px;
   display: inline-block;
+}
+.card-left {
+  display: inline-block;
+}
+.card-right {
+  float: right;
+  display: inline-block;
+  height: 100%;
+  line-height: 170rpx;
 }
 </style>
