@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="msg-item"
-             @click="toFeedBack('我要吐槽<')">
+             @click="toFeedBack('我要吐槽')">
           <div class="item-text">我要吐槽</div>
           <div class="item-img">
             <i-icon type="feedback_fill"

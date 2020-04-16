@@ -10,7 +10,11 @@
               @click="comeBack()" />
     </div> -->
     <div class="up">
+
       <div class="up-item">
+        <div class="up-title">
+          换乘查询
+        </div>
         <div class="route-input">
           <input type="text"
                  v-model="from"
@@ -66,7 +70,7 @@
 
 <script>
 const { $Toast } = require('../../../static/dist/base/index')
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 import store from '../../vuex/index'
 export default {
   data() {
@@ -86,6 +90,7 @@ export default {
       'GetSEStationsTran',
       'GetSEStations'
     ]),
+    ...mapMutations('bus',["SET_TRANSFER_SHOW"]),
     exchangeFromTo() {
       let temp = ''
       if (this.from != '' && this.to != '') {
@@ -142,10 +147,13 @@ export default {
         })
       }
     },
-
     comeBack() {
       wx.navigateBack(-1)
     }
+  },
+  onUnload() {
+    Object.assign(this.$data, this.$options.data())
+    this.SET_TRANSFER_SHOW(false);
   },
   store
 }
@@ -171,6 +179,7 @@ page {
   background-color: #353889;
   padding: 10% 5%;
 }
+
 .up-item {
   background-color: #353889;
   width: 100%;
@@ -189,12 +198,19 @@ page {
   font-size: 50px;
   padding: 20px 0 20px 30px;
 }
+.up-title {
+  padding: 30px 70px;
+  padding-top: 15%;
+  color: #fff;
+  font-size: 60px;
+  margin-bottom: 50px;
+  font-weight: lighter;
+}
 .route-input {
   padding: 0 40px;
   color: #a3a3a3;
   position: relative;
   padding-right: 150px;
-  padding-top: 25%;
 }
 .route-input input {
   height: 100px;
@@ -202,11 +218,7 @@ page {
   background-color: #fff;
   padding: 0 50px;
   font-size: 27px;
-  margin-bottom: 100rpx;
-}
-.line {
-  background-color: #353889;
-  height: 10px;
+  margin-bottom: 60px;
 }
 .exchange-icon {
   position: absolute;

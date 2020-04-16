@@ -1,12 +1,19 @@
 <template>
-  <div class="login-container undraw_mobile_login_ikmv" @touchstart="touchStart" @touchend="touchEnd">
+  <div class="login-container undraw_mobile_login_ikmv"
+       @touchstart="touchStart"
+       @touchend="touchEnd">
     <i-toast id="toast" />
     <div class="login-box">
       <div class="login-title">Hi，欢迎您回来</div>
       <div class="login-input">
-        <input type="text" v-model="loginName" placeholder="账号" />
-        <input type="password" v-model="password" placeholder="密码" />
-        <button class="login-btn" @click="login()">登录</button>
+        <input type="text"
+               v-model="loginName"
+               placeholder="账号" />
+        <input type="password"
+               v-model="password"
+               placeholder="密码" />
+        <button class="login-btn"
+                @click="login()">登录</button>
       </div>
       <div class="register">
         <p @click="toRegister()">新用户？请点击注册</p>
@@ -19,45 +26,48 @@
 </template>
 
 <script>
-const { $Toast } = require("../../../static/dist/base/index");
-import { mapActions } from "vuex";
+const { $Toast } = require('../../../static/dist/base/index')
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
-      loginName: "",
-      password: ""
-    };
+      loginName: '',
+      password: ''
+    }
   },
   methods: {
-    ...mapActions("user", ["Login"]),
+    ...mapActions('user', ['Login']),
     toRegister() {
       wx.navigateTo({
-        url: "/pages/register/main"
-      });
+        url: '/pages/register/main'
+      })
     },
     login() {
-      if (this.login == "") {
+      if (this.login == '') {
         $Toast({
-          content: "账号不能为空",
-          type: "error"
-        });
-        return;
+          content: '账号不能为空',
+          type: 'error'
+        })
+        return
       }
-      if (this.password == "") {
+      if (this.password == '') {
         $Toast({
-          content: "密码不能为空",
-          type: "error"
-        });
-        return;
+          content: '密码不能为空',
+          type: 'error'
+        })
+        return
       }
       let data = {
         loginName: this.loginName,
         password: this.password
-      };
-      this.Login(data);
+      }
+      this.Login(data)
     }
+  },
+  onUnload() {
+    Object.assign(this.$data, this.$options.data())
   }
-};
+}
 </script>
 <style >
 page {

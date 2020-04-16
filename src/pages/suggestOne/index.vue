@@ -2,13 +2,18 @@
   <div class="fadeIn">
     <i-toast id="toast" />
     <div class="return-black">
-      <i-icon type="return" color="#353889" size="35" @click="comeBack()" />
+      <i-icon type="return"
+              color="#353889"
+              size="35"
+              @click="comeBack()" />
     </div>
     <div class="box">
       <div class="card-title">关于{{ msg }}的反馈</div>
       <div class="text-box">
-        <textarea class="text" v-model="suggest" placeholder="请输入您的反馈信息" />
-      </div>
+        <textarea class="text"
+                  v-model="suggest"
+                  placeholder="请输入您的反馈信息" />
+        </div>
       <div class="btn">
         <i-button @click="feedBack()" shape="circle" size="small">提交</i-button>
       </div>
@@ -17,45 +22,48 @@
 </template>
 
 <script>
-import store from "../../vuex/index";
-import { mapActions } from "vuex";
-const { $Toast } = require("../../../static/dist/base/index");
+import store from '../../vuex/index'
+import { mapActions } from 'vuex'
+const { $Toast } = require('../../../static/dist/base/index')
 export default {
   data() {
     return {
-      msg: "",
-      suggest: ""
-    };
+      msg: '',
+      suggest: ''
+    }
   },
   onLoad(options) {
-    this.msg = options.msg;
+    this.msg = options.msg
   },
   onUnload: function() {
-    Object.assign(this.$data, this.$options.data());
+    Object.assign(this.$data, this.$options.data())
   },
   methods: {
-    ...mapActions("user", ["FeedBack"]),
+    ...mapActions('user', ['FeedBack']),
     feedBack() {
-      if (this.suggest != "") {
-        let userid = wx.getStorageSync("loginName");
+      if (this.suggest != '') {
+        let userid = wx.getStorageSync('loginName')
         let data = {
           content: this.suggest,
           userid: userid
-        };
-        this.FeedBack(data);
+        }
+        this.FeedBack(data)
       } else {
         $Toast({
-          content: "反馈信息不能为空",
-          type: "error"
-        });
+          content: '反馈信息不能为空',
+          type: 'error'
+        })
       }
     },
     comeBack() {
-      wx.navigateBack(-1);
+      wx.navigateBack(-1)
     }
   },
+  onUnload() {
+    Object.assign(this.$data, this.$options.data())
+  },
   store
-};
+}
 </script>
 <style>
 page {
