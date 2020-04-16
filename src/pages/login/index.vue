@@ -1,7 +1,7 @@
 <template>
-  <div class="login-container undraw_mobile_login_ikmv">
+  <div class="login-container undraw_mobile_login_ikmv" @touchstart="touchStart" @touchend="touchEnd">
     <i-toast id="toast" />
-    <!-- <div class="login-box fadeIn">
+    <div class="login-box">
       <div class="login-title">Hi，欢迎您回来</div>
       <div class="login-input">
         <input type="text" v-model="loginName" placeholder="账号" />
@@ -9,9 +9,12 @@
         <button class="login-btn" @click="login()">登录</button>
       </div>
       <div class="register">
-        <p @click="toRegister()">注册</p>
+        <p @click="toRegister()">新用户？请点击注册</p>
       </div>
-    </div>-->
+    </div>
+    <div class="return-foot">
+      <p>向右滑动返回上一层</p>
+    </div>
   </div>
 </template>
 
@@ -28,7 +31,7 @@ export default {
   methods: {
     ...mapActions("user", ["Login"]),
     toRegister() {
-      wx.reLaunch({
+      wx.navigateTo({
         url: "/pages/register/main"
       });
     },
@@ -69,16 +72,12 @@ page {
   padding-top: 20%;
   background-size: 100%;
   background-repeat: no-repeat;
-  background-position: 0% 10%;
+  background-position: 0% 70%;
 }
 .login-box {
   margin: auto;
   width: 80%;
   height: 60%;
-  margin-top: 10%;
-  background-color: #fff;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px 0px;
   display: flex;
   flex-direction: column;
 }
@@ -88,20 +87,20 @@ page {
   padding: 30px;
   font-size: 50px;
   line-height: 100px;
-  flex: 2;
 }
 .login-input {
   padding: 0 30px;
   color: #a3a3a3;
-  flex: 5;
+  flex: 2;
+  margin-bottom: 35px;
 }
 .login-input input {
   height: 100px;
-  border-radius: 10px;
-  background-color: #f1f1f1;
+  background-color: #fff;
   padding: 0 30px;
   font-size: 27px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #353889;
 }
 .login-btn {
   margin: 0 auto;
@@ -110,9 +109,9 @@ page {
   font-weight: normal;
   background: #353889;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 70px;
   line-height: 80px;
-  margin-top: 10px;
+  margin-top: 50px;
 }
 button::after {
   border: none;
@@ -121,5 +120,6 @@ button::after {
   flex: 2;
   margin-top: 30px;
   text-align: center;
+  color: #353889;
 }
 </style>

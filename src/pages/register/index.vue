@@ -1,7 +1,11 @@
 <template>
-  <div class="register-container">
+  <div
+    class="register-container undraw_mobile_web_2g8b"
+    @touchstart="touchStart"
+    @touchend="touchEnd"
+  >
     <i-toast id="toast" />
-    <div class="register-box fadeIn">
+    <div class="register-box">
       <div class="register-title">Hi，欢迎加入我们</div>
       <div class="register-input">
         <input type="text" v-model="loginName" placeholder="账号" />
@@ -9,6 +13,9 @@
         <input type="text" v-model="password" placeholder="密码" />
         <button class="register-btn" open-type="getUserInfo" @getuserinfo="register">注册</button>
       </div>
+    </div>
+    <div class="return-foot">
+      <p>向右滑动返回上一层</p>
     </div>
   </div>
 </template>
@@ -82,7 +89,7 @@ export default {
 </script>
 <style >
 page {
-  background-color: #353889;
+  background-color: #fff;
   height: 100%;
 }
 </style>
@@ -90,22 +97,22 @@ page {
 .register-container {
   width: 100%;
   height: 100%;
+  background-size: 90%;
+  background-repeat: no-repeat;
+  background-position: 30% 5%;
+  overflow: hidden;
 }
 .register-box {
   margin: auto;
   width: 80%;
-  height: 60%;
-  margin-top: 10%;
+  margin-top: 65%;
   background-color: #fff;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 1px 5px 0px;
   display: flex;
   flex-direction: column;
 }
 .register-title {
-  height: 150px;
+  height: 100px;
   text-align: center;
-  padding: 30px;
   font-size: 50px;
   line-height: 150px;
   flex: 1;
@@ -118,11 +125,11 @@ page {
 }
 .register-input input {
   height: 100px;
-  border-radius: 10px;
-  background-color: #f1f1f1;
+  background-color: #fff;
   padding: 0 30px;
   font-size: 27px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #353889;
 }
 .register-btn {
   margin: 0 auto;
@@ -131,9 +138,9 @@ page {
   font-weight: normal;
   background: #353889;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 70px;
   line-height: 80px;
-  margin-top: 10px;
+  margin-top: 50px;
 }
 button::after {
   border: none;

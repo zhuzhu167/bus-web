@@ -126,9 +126,9 @@ page {
   padding-top: 20%;
   height: 80%;
   width: 100%;
-  background-size: 115%;
+  background-size: 80%;
   background-repeat: no-repeat;
-  background-position: 0% 40%;
+  background-position: 200% 100%;
 }
 .search-head {
   align-items: center;
@@ -170,12 +170,12 @@ button::after {
   border: none;
 }
 .search-card {
-  background: #fff;
-  border-radius: 30px;
-  height: 180px;
-  padding: 10px 60px;
-  margin: 0 40px 40px 40px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px 0px;
+  height: 165px;
+  padding: 10px 30px;
+  margin: 0 50px 20px 50px;
+  border-bottom: 1px solid #353889;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 .search-card:active {
   background-color: #f9f9fa;
@@ -202,6 +202,6 @@ button::after {
   float: right;
   display: inline-block;
   height: 100%;
-  line-height: 170rpx;
+  line-height: 170px;
 }
 </style>

@@ -43,7 +43,13 @@
       </div>
     </div>
     <div class="user-context">
-      <swiper style="height:100%" display-multiple-items="2">
+      <swiper
+        current="1"
+        style="height:100%"
+        display-multiple-items="2"
+        previous-margin="50rpx"
+        next-margin="50rpx"
+      >
         <block>
           <swiper-item>
             <div class="user-card user-card-one" @click="toUrlneedLogin('clock')">
@@ -51,6 +57,14 @@
                 <i-icon type="clock_fill" color="#ffffff" size="70" />
               </div>
               <div class="card-name">上车提醒</div>
+            </div>
+          </swiper-item>
+          <swiper-item>
+            <div class="user-card user-card-flour" @click="toUrl('route')">
+              <div class="card-img">
+                <i-icon type="barrage_fill" color="#ffffff" size="70" />
+              </div>
+              <div class="card-name">换乘查询</div>
             </div>
           </swiper-item>
           <swiper-item>
@@ -67,14 +81,6 @@
                 <i-icon type="browse_fill" color="#ffffff" size="70" />
               </div>
               <div class="card-name">候车趣闻</div>
-            </div>
-          </swiper-item>
-          <swiper-item>
-            <div class="user-card user-card-flour" @click="toUrl('route')">
-              <div class="card-img">
-                <i-icon type="barrage_fill" color="#ffffff" size="70" />
-              </div>
-              <div class="card-name">换乘查询</div>
             </div>
           </swiper-item>
           <swiper-item>
@@ -204,7 +210,6 @@ page {
 .user-context {
   flex: 6;
   position: relative;
-  padding: 0 5%;
   margin-top: 56px;
   padding-top: 45%;
   padding-bottom: 15%;

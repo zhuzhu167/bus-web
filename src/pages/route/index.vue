@@ -1,179 +1,154 @@
 <template>
-  <div class="box">
+  <div class="box"
+       @touchstart="touchStart"
+       @touchend="touchEnd">
     <i-toast id="toast" />
-    <div class="return-back">
-      <i-icon type="return" color="#fff" size="35" @click="comeBack()" />
-    </div>
-
+    <!-- <div class="return-back">
+      <i-icon type="return"
+              color="#fff"
+              size="35"
+              @click="comeBack()" />
+    </div> -->
     <div class="up">
       <div class="up-item">
         <div class="route-input">
-        <input type="text" v-model="from" placeholder="出发点" />
-        <div class="line"></div>
-        <input type="text" v-model="to" placeholder="目的点" />
-        <div class="exchange-icon" @click="exchangeFromTo()">
+          <input type="text"
+                 v-model="from"
+                 placeholder="出发点" />
+          <input type="text"
+                 v-model="to"
+                 placeholder="目的点" />
+          <!-- <div class="exchange-icon" @click="exchangeFromTo()">
           <i-icon type="narrow" size="25"/>
+        </div> -->
+          <button class="route-btn"
+                  @click="find()">
+            搜索</button>
         </div>
-        <button class="route-btn" @click="find()">搜索</button>
       </div>
-      </div>
+
     </div>
     <div class="down">
-      <div class="down-item">
-        <div v-if="TransferIsShow" class="route-card fadeIn">
-      <div class="card" @click="getDetailStationT()">
-        <div class="card-left">
-          <div class="card-title">
-            {{ start }}
-            <i-icon type="enterinto_fill" color="#353889" />
-            {{ end }}
-          </div>
-          <div class="card-context">
-            坐 {{ TransferList[0] }}
-            <p style="display:inline-block" v-if="TransferList[2]!=null&&TransferList[2]!=''">
-              号线，在{{ TransferList[2] }}站 
-              <p style="display:inline-block;color:#353889"/> 转</p> 
-              {{ TransferList[1] }} 号线
-            </p>
-          </div>
-        </div>
-        <div class="card-right">
-          <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </div>
-      </div>
-    </div>
-      </div>
-    </div>
 
-    <!-- <div class="route-container">
-      <div>
-        <div class="route-title">路线</div>
-      </div>
-      <div class="route-input">
-        <input type="text" v-model="from" placeholder="出发点" />
-        <div class="line"></div>
-        <input type="text" v-model="to" placeholder="目的点" />
-        <div class="exchange-icon" @click="exchangeFromTo()">
-          <i class="fa fa-exchange" aria-hidden="true"></i>
-        </div>
-        <button class="route-btn" @click="find()">搜索</button>
-      </div>
-    </div>
-    <div class="common-location" v-if="!TransferIsShow">
-      <div class="common-title">常用地点</div>
-      <div class="common-context"></div>
-    </div>
-    <div v-if="TransferIsShow" class="route-card fadeIn">
-      <div class="card" @click="getDetailStationT()">
-        <div class="card-left">
-          <div class="card-title">
-            {{ start }}
-            <i-icon type="enterinto_fill" color="#353889" />
-            {{ end }}
-          </div>
-          <div class="card-context">
-            坐 {{ TransferList[0] }}
-            <p style="display:inline-block" v-if="TransferList[2]!=null&&TransferList[2]!=''">
-              号线，在{{ TransferList[2] }}站 
-              <p style="display:inline-block;color:#353889"> 转</p> 
+      <div class="route-card fadeIn">
+        <div class="card"
+             @click="getDetailStationT()"
+             v-if="TransferIsShow">
+          <div class="card-left">
+            <div class="card-title">
+              {{ start }}
+              <i-icon type="enterinto_fill"
+                      color="#353889" />
+              {{ end }}
+            </div>
+            <div class="card-context">
+              坐 {{ TransferList[0] }}
+              <p style="display:inline-block"
+                 v-if="TransferList[2]!=null&&TransferList[2]!=''">
+                号线，在{{ TransferList[2] }}站
+                <p style="display:inline-block;color:#353889" /> 转</p>
               {{ TransferList[1] }} 号线
-            </p>
+              </p>
+            </div>
+          </div>
+          <div class="card-right">
+            <i class="fa fa-angle-right"
+               aria-hidden="true"></i>
           </div>
         </div>
-        <div class="card-right">
-          <i class="fa fa-angle-right" aria-hidden="true"></i>
-        </div>
       </div>
-    </div>-->
+    </div>
+    <div class="return-foot">
+      <p>向右滑动返回上一层</p>
+    </div>
   </div>
 </template>
 
 <script>
-const { $Toast } = require("../../../static/dist/base/index");
-import { mapGetters, mapActions } from "vuex";
-import store from "../../vuex/index";
+const { $Toast } = require('../../../static/dist/base/index')
+import { mapGetters, mapActions } from 'vuex'
+import store from '../../vuex/index'
 export default {
   data() {
     return {
-      from: "",
-      to: "",
-      start: "",
-      end: ""
-    };
+      from: '',
+      to: '',
+      start: '',
+      end: ''
+    }
   },
   computed: {
-    ...mapGetters("bus", ["TransferList", "TransferIsShow"])
+    ...mapGetters('bus', ['TransferList', 'TransferIsShow'])
   },
   methods: {
-    ...mapActions("bus", [
-      "LessTransfer",
-      "GetSEStationsTran",
-      "GetSEStations"
+    ...mapActions('bus', [
+      'LessTransfer',
+      'GetSEStationsTran',
+      'GetSEStations'
     ]),
     exchangeFromTo() {
-      let temp = "";
-      if (this.from != "" && this.to != "") {
-        temp = this.from;
-        this.from = this.to;
-        this.to = temp;
+      let temp = ''
+      if (this.from != '' && this.to != '') {
+        temp = this.from
+        this.from = this.to
+        this.to = temp
       }
     },
     find() {
-      if (this.from == "") {
+      if (this.from == '') {
         $Toast({
-          content: "出发点不能为空",
-          type: "error"
-        });
-        return;
+          content: '出发点不能为空',
+          type: 'error'
+        })
+        return
       }
-      if (this.to == "") {
+      if (this.to == '') {
         $Toast({
-          content: "目的地不能为空",
-          type: "error"
-        });
-        return;
+          content: '目的地不能为空',
+          type: 'error'
+        })
+        return
       }
       let data = {
         start: this.from,
         end: this.to
-      };
-      this.LessTransfer(data);
-      this.start = this.from;
-      this.end = this.to;
+      }
+      this.LessTransfer(data)
+      this.start = this.from
+      this.end = this.to
     },
     getDetailStationT() {
-      if (this.TransferList[2] != "") {
+      if (this.TransferList[2] != '') {
         let data = {
           sta: this.start,
           end: this.end,
           tran: this.TransferList[2],
           rid: this.TransferList[0],
           ridTran: this.TransferList[1]
-        };
-        this.GetSEStationsTran(data);
+        }
+        this.GetSEStationsTran(data)
         wx.reLaunch({
-          url: "/pages/routeStations/main"
-        });
+          url: '/pages/routeStations/main'
+        })
       } else {
         let data = {
           sta: this.start,
           end: this.end,
           rid: this.TransferList[0]
-        };
-        this.GetSEStations(data);
+        }
+        this.GetSEStations(data)
         wx.reLaunch({
-          url: "/pages/routeStations/main"
-        });
+          url: '/pages/routeStations/main'
+        })
       }
     },
 
     comeBack() {
-      wx.navigateBack(-1);
+      wx.navigateBack(-1)
     }
-  
   },
   store
-};
+}
 </script>
 
 <style>
@@ -189,7 +164,7 @@ page {
   height: 100%;
 }
 .up {
-  flex: 1;
+  flex: 3;
   background-color: #fff;
 }
 .return-back {
@@ -200,18 +175,11 @@ page {
   background-color: #353889;
   width: 100%;
   height: 100%;
-  border-bottom-right-radius: 100px;
+  border-bottom-right-radius: 800px;
 }
 .down {
   flex: 1.5;
-  background-color: #353889;
-}
-.down-item {
-  background-color: #fff;
-  width: 100%;
-  height: 100%;
-  border-top-left-radius: 100px;
-  margin-left: 15px;
+  text-align: right;
 }
 .route-container {
   background-color: #353889;
@@ -225,13 +193,16 @@ page {
   padding: 0 40px;
   color: #a3a3a3;
   position: relative;
+  padding-right: 150px;
+  padding-top: 25%;
 }
 .route-input input {
   height: 100px;
-  border-radius: 10px;
+  border-radius: 70px;
   background-color: #fff;
-  padding: 0 30px;
+  padding: 0 50px;
   font-size: 27px;
+  margin-bottom: 100rpx;
 }
 .line {
   background-color: #353889;
@@ -256,37 +227,35 @@ page {
   background-color: #f8f8f8;
 }
 .route-btn {
-  margin: 0 auto;
-  height: 80px;
-  font-size: 35px;
-  font-weight: normal;
+  height: 90px;
   background: #fff;
-  color: #000;
+  color: #353889;
   border-radius: 70px;
-  line-height: 80px;
-  margin-top: 30px;
+  line-height: 90px;
+  width: auto;
+  float: left;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 6px 0;
 }
 button::after {
   border: none;
 }
 .route-card {
-  padding: 20px 25px;
+  padding: 0 25px;
 }
 .card {
   height: 200px;
-background-color: #fff;
-border-radius: 10px;
-padding: 0 35px;
-
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 0 35px;
 }
 .card-title {
   height: 110px;
-  line-height: 135px;
-  font-size: 37px;
+  line-height: 110px;
+  font-size: 45px;
 }
 .card-context {
-  height: 90px;
-  line-height: 55px;
+  height: 120px;
+  line-height: 70px;
   color: #a8a8a8;
   font-size: 32px;
 }
