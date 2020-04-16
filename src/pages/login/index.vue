@@ -1,7 +1,7 @@
 <template>
-  <div class="login-container">
+  <div class="login-container undraw_mobile_login_ikmv">
     <i-toast id="toast" />
-    <div class="login-box fadeIn">
+    <!-- <div class="login-box fadeIn">
       <div class="login-title">Hi，欢迎您回来</div>
       <div class="login-input">
         <input type="text" v-model="loginName" placeholder="账号" />
@@ -11,7 +11,7 @@
       <div class="register">
         <p @click="toRegister()">注册</p>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
   methods: {
     ...mapActions("user", ["Login"]),
     toRegister() {
-      wx.navigateTo({
+      wx.reLaunch({
         url: "/pages/register/main"
       });
     },
@@ -58,7 +58,7 @@ export default {
 </script>
 <style >
 page {
-  background-color: #fec84f;
+  background-color: #fff;
   height: 100%;
 }
 </style>
@@ -66,6 +66,10 @@ page {
 .login-container {
   width: 100%;
   height: 100%;
+  padding-top: 20%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 0% 10%;
 }
 .login-box {
   margin: auto;
@@ -104,7 +108,7 @@ page {
   height: 80px;
   font-size: 37px;
   font-weight: normal;
-  background: #fec84f;
+  background: #353889;
   color: #fff;
   border-radius: 10px;
   line-height: 80px;

@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="container undraw_select_option_y75i" @touchstart="touchStart" @touchend="touchEnd">
     <i-toast id="toast" />
+
     <div class="search-head">
       <img
         src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png"
@@ -19,6 +20,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="return-foot">
+      <p>向右滑动返回上一层</p>
     </div>
   </div>
 </template>
@@ -55,6 +59,9 @@ export default {
           type: "error"
         });
       }
+    },
+    comeBack() {
+      wx.navigateBack(-1);
     }
   },
   store
@@ -62,11 +69,19 @@ export default {
 </script>
 <style>
 page {
-  background-color: #f1f1f1;
+  background-color: #fff;
   height: 100%;
 }
 </style>
 <style scoped>
+.container {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: 0% 60%;
+  height: 100%;
+  padding-top: 20%;
+}
+
 .search-head {
   align-items: center;
   height: 80px;
@@ -75,7 +90,7 @@ page {
 }
 .search-head input {
   height: 80px;
-  background-color: #fff;
+  background-color: #f9f9fa;
   border-radius: 50px;
   font-size: 30px;
   color: #a3a3a3;
@@ -95,7 +110,7 @@ page {
   margin: 0 auto;
   height: 80px;
   font-size: 30px;
-  background: #fec84f;
+  background: #353889;
   color: #fff;
   border-radius: 50px;
   line-height: 80px;
@@ -107,11 +122,12 @@ button::after {
   border: none;
 }
 .search-card {
-  background-color: #fff;
-  border-radius: 10px;
+  background: #353889;
+  border-radius: 70px;
   height: 80px;
   padding: 10px 40px;
-  margin: 25px;
+  margin: 50px;
+  color: #fff;
 }
 .search-card:active {
   background-color: #f8f8f8;

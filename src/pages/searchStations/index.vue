@@ -1,11 +1,19 @@
 <template>
   <div class="search-stations fadeIn">
     <i-toast id="toast" />
-    <i-steps direction="vertical">
-      <i-step status="finish" v-for="(item,index) in StationList" :key="index">
-        <view slot="title">{{ item }} 站</view>
-      </i-step>
-    </i-steps>
+    <div class="return-black">
+      <i-icon type="return" color="#ccc" size="35" @click="comeBack()" />
+    </div>
+    <div
+      class="step-list undraw_my_app_grf2"
+      
+    >
+      <i-steps direction="vertical">
+        <i-step status="finish" v-for="(item,index) in StationList" :key="index">
+          <view slot="title">{{ item }} 站</view>
+        </i-step>
+      </i-steps>
+    </div>
   </div>
 </template>
 
@@ -32,6 +40,9 @@ export default {
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];
       this.id = currPage.options.id;
+    },
+    comeBack() {
+      wx.navigateBack(-1);
     }
   },
   onUnload() {
@@ -48,26 +59,13 @@ page {
 }
 </style>
 <style scoped>
-.search-stations {
-  margin-top: 30px;
+.return {
+  margin: 10% 5%;
+  margin-bottom: 10%;
 }
-.search-card {
-  background-color: #fff;
-  border-radius: 10px;
-  height: 80px;
-  padding: 10px 40px;
-  margin: 25px;
-}
-.card-title {
-  line-height: 80px;
-  font-size: 35px;
-}
-.card-title-p {
-  margin-left: 25px;
-  display: inline-block;
-}
-.item-img {
-  display: inline-block;
-  float: right;
+.step-list {
+  background-size: 110%;
+  background-repeat: no-repeat;
+  background-position: 13% 0%;
 }
 </style>

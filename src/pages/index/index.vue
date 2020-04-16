@@ -96,7 +96,7 @@ export default {
     },
     //跳转
     toSearch() {
-      wx.navigateTo({
+      wx.reLaunch({
         url: "/pages/search/main"
       });
     },
@@ -106,7 +106,7 @@ export default {
       }
     },
     toSelect() {
-      wx.navigateTo({
+      wx.reLaunch({
         url: "/pages/station/main"
       });
     }
@@ -130,7 +130,7 @@ page {
 }
 .index-search {
   display: flex;
-  background-color: #fec84f;
+  background-color: #353889;
   height: 70px;
   line-height: 70px;
   padding: 30px 0;
@@ -167,7 +167,7 @@ page {
   margin: 0 15px;
 }
 .input-border {
-  border-bottom: 8px solid #fec84f;
+  border-bottom: 8px solid #353889;
 }
 .index-card-list {
   padding: 0 25px;

@@ -1,13 +1,18 @@
 <template>
-  <div class="remind-container fadeIn">
+  <div class="fadeIn">
     <i-toast id="toast" />
-    <div class="card-title">关于{{ msg }}的反馈</div>
-    <i-panel>
-      <i-cell>
-        <textarea v-model="suggest" auto-height placeholder="请输入您的反馈信息" />
-      </i-cell>
-    </i-panel>
-    <i-button @click="feedBack()" type="success" shape="circle" size="small">提交</i-button>
+    <div class="return-black">
+      <i-icon type="return" color="#353889" size="35" @click="comeBack()" />
+    </div>
+    <div class="box">
+      <div class="card-title">关于{{ msg }}的反馈</div>
+      <div class="text-box">
+        <textarea class="text" v-model="suggest" placeholder="请输入您的反馈信息" />
+      </div>
+      <div class="btn">
+        <i-button @click="feedBack()" shape="circle" size="small">提交</i-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,6 +49,9 @@ export default {
           type: "error"
         });
       }
+    },
+    comeBack() {
+      wx.navigateBack(-1);
     }
   },
   store
@@ -51,14 +59,30 @@ export default {
 </script>
 <style>
 page {
-  background-color: #f1f1f1;
+  background-color: #fff;
   height: 100%;
+  position: relative;
 }
 </style>
 <style scoped>
+.box {
+  padding: 0 40px;
+}
+.text-box {
+  border: 1px solid #353889;
+  border-radius: 30px;
+  padding: 40px;
+}
+.text {
+  height: 400px;
+  width: 100%;
+}
 .card-title {
-  margin: 30px 30px 30px 40px;
-  color: #a8a8a8;
-  font-size: 30px;
+  margin: 40px 0;
+  color: #353889;
+  font-size: 40px;
+}
+.btn {
+  margin-top: 100px;
 }
 </style>

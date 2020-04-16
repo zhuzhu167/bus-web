@@ -1,5 +1,5 @@
 <template>
-  <div class="lost-box fadeIn">
+  <div class="lost-box fadeIn" @touchstart="touchStart" @touchend="touchEnd">
     <i-toast id="toast" />
     <i-card
       :extra="item.title"
@@ -10,6 +10,9 @@
       <view slot="content">{{ item.content }}</view>
       <view slot="footer">联系方式：{{ item.contactNum }}</view>
     </i-card>
+    <div class="return-foot">
+      <p>向右滑动返回上一层</p>
+    </div>
   </div>
 </template>
 
@@ -35,11 +38,12 @@ export default {
 <style>
 page {
   height: 100%;
-  background-color: #f1f1f1;
+  background-color: #fff;
 }
 </style>
 <style scoped>
 .lost-box {
-  margin-top: 60px;
+  margin-top: 10%;
+  height: 100%;
 }
 </style>

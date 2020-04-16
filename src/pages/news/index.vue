@@ -1,17 +1,22 @@
 <template>
   <div>
     <i-toast id="toast" />
-    <div class="new-title">趣闻</div>
-    <div class="page fadeIn">
-      <div>
-        <div class="list-cell" v-for="item in itemList" :key="item">
-          <div class="media-list-logo">
-            <image v-if="showImg" :src="item.thumbnail_pic_s" />
-          </div>
-          <div class="media-list-body">
-            <div class="media-list-text-top">{{item.author_name}}</div>
-            <div class="media-list-text-bottom">{{item.title}}</div>
-          </div>
+    <div class="return-black">
+      <i-icon type="return" color="#353889" size="35" @click="comeBack()" />
+    </div>
+    <div class="new-title-box undraw_researching_22gp">
+      <div class="new-title">
+        <p>每天趣闻</p>
+      </div>
+      <div class="new-date">
+        <p>2020/04/13</p>
+      </div>
+    </div>
+    <div class="new-card-box">
+      <div class="new-card" v-if="showImg" v-for="item in itemList" :key="item">
+        <div class="new-img" :style="'background: url('+item.thumbnail_pic_s+') no-repeat;'"></div>
+        <div class="card-title">
+          <p>{{item.title}}</p>
         </div>
       </div>
     </div>
@@ -55,6 +60,9 @@ export default {
           });
         }
       });
+    },
+    comeBack() {
+      wx.navigateBack(-1);
     }
   }
 };
@@ -62,37 +70,70 @@ export default {
 
 <style>
 page {
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   height: 100%;
 }
 </style>
 <style scoped>
+.return {
+  margin-bottom: 6%;
+  margin-left: 5%;
+}
+.new-title-box {
+  height: 560px;
+  color: #000;
+  background-size: 93%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
 .new-title {
-  font-size: 50px;
-  padding: 20px 0 20px 30px;
-  background-color: #fec84f;
+  color: #353889;
+  font-size: 60px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  padding-left: 6%;
 }
-image {
-  width: 120px;
-  height: 115px;
+.new-date {
+  font-size: 30px;
+  color: #ccc;
+  padding-left: 6%;
+}
+.new-card-box {
+  padding: 0 5%;
+  padding-top: 5%;
+}
+.new-card {
+  width: 85%;
+  margin: auto;
+  height: 350px;
+  position: relative;
+  margin-bottom: 60px;
+}
+.new-img {
+  height: 100%;
+  width: 100%;
+  border-radius: 30px;
+  background-size: cover;
+}
+.card-title {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  border-radius: 30px;
+}
+.card-title p {
+  font-size: 40px;
   display: inline-block;
-  overflow: hidden;
-}
-.list-cell {
-  height: 180px;
-  display: flex;
-  background-color: #fff;
-  margin-bottom: 10px;
-}
-.media-list-logo {
-  flex: 1;
-  padding: 35px 20px;
-}
-.media-list-body {
-  flex: 5;
-  padding: 20px;
-}
-.media-list-text-bottom {
-  font-size: 31px;
+  color: #ffffff;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  max-height: 70px;
+  position: absolute;
+  bottom: 48px;
+  padding: 0 30px;
 }
 </style>

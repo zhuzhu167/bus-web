@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="search undraw_order_ride_xjs4" @touchstart="touchStart" @touchend="touchEnd">
     <i-toast id="toast" />
+
     <div class="search-head">
       <img
         src="http://nos.netease.com/mailpub/hxm/yanxuan-wap/p/20150730/style/img/icon-normal/search2-2fb94833aa.png"
@@ -42,6 +43,9 @@
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </div>
       </div>
+    </div>
+    <div class="return-foot">
+      <p>向右滑动返回上一层</p>
     </div>
   </div>
 </template>
@@ -112,11 +116,20 @@ export default {
 </script>
 <style>
 page {
-  background-color: #f1f1f1;
+  background-color: #fff;
   height: 100%;
+  width: 100%;
 }
 </style>
 <style scoped>
+.search {
+  padding-top: 20%;
+  height: 80%;
+  width: 100%;
+  background-size: 115%;
+  background-repeat: no-repeat;
+  background-position: 0% 40%;
+}
 .search-head {
   align-items: center;
   height: 80px;
@@ -125,7 +138,7 @@ page {
 }
 .search-head input {
   height: 80px;
-  background-color: #fff;
+  background-color: #f9f9fa;
   border-radius: 50px;
   font-size: 30px;
   color: #a3a3a3;
@@ -145,7 +158,7 @@ page {
   margin: 0 auto;
   height: 80px;
   font-size: 30px;
-  background: #fec84f;
+  background: #353889;
   color: #fff;
   border-radius: 50px;
   line-height: 80px;
@@ -157,14 +170,15 @@ button::after {
   border: none;
 }
 .search-card {
-  background-color: #fff;
-  border-radius: 10px;
+  background: #fff;
+  border-radius: 30px;
   height: 180px;
-  padding: 10px 40px;
-  margin: 0 25px 25px 25px;
+  padding: 10px 60px;
+  margin: 0 40px 40px 40px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px 0px;
 }
 .search-card:active {
-  background-color: #f8f8f8;
+  background-color: #f9f9fa;
 }
 .card-title {
   height: 90px;
@@ -175,7 +189,7 @@ button::after {
   height: 90px;
   line-height: 90px;
   font-size: 27px;
-  color: #a3a3a3;
+  color: #000;
 }
 .card-item {
   margin-right: 30px;

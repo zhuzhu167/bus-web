@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/login/main",
+    "pages/busIndex/main",
     "pages/index/main",
     "pages/route/main",
     "pages/routeStations/main",
@@ -17,7 +19,7 @@
     "pages/suggestTwo/main",
     "pages/suggestMy/main",
     "pages/set/main",
-    "pages/login/main",
+   
     "pages/register/main",
     "pages/like/main",
     "pages/lost/main",
@@ -38,7 +40,8 @@
     "i-index": "../static/dist/index/index",
     "i-index-item": "../static/dist/index-item/index",
     "i-steps": "../static/dist/steps/index",
-    "i-step": "../static/dist/step/index"
+    "i-step": "../static/dist/step/index",
+    "i-swipeout": "../static/dist/swipeout/index"
   },
   "permission": {
     "scope.userLocation": {
@@ -47,41 +50,9 @@
   },
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fec84f",
-    "navigationBarTitleText": "出行精灵",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "color": "#999",
-    "backgroundColor": "#fff",
-    "selectedColor": "#333",
-    "borderStyle": "white",
-
-    "list": [{
-        "text": "公交",
-        "pagePath": "pages/index/main",
-        "iconPath": "static/tabs/location-unactive.png",
-        "selectedIconPath": "static/tabs/location-active.png"
-      },
-      {
-        "text": "路线",
-        "pagePath": "pages/route/main",
-        "iconPath": "static/tabs/route-unactive.png",
-        "selectedIconPath": "static/tabs/route-active.png"
-      },
-      {
-        "text": "趣闻",
-        "pagePath": "pages/news/main",
-        "iconPath": "static/tabs/orders.png",
-        "selectedIconPath": "static/tabs/orders-active.png"
-      },
-      {
-        "text": "我的",
-        "pagePath": "pages/user/main",
-        "iconPath": "static/tabs/user-unactive.png",
-        "selectedIconPath": "static/tabs/user-active.png"
-      }
-    ],
-    "position": "bottom"
+    "navigationBarBackgroundColor": "#2d294e",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "white",
+    "navigationStyle": "custom"
   }
 }

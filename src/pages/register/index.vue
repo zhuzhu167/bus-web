@@ -82,7 +82,7 @@ export default {
 </script>
 <style >
 page {
-  background-color: #fec84f;
+  background-color: #353889;
   height: 100%;
 }
 </style>
@@ -129,7 +129,7 @@ page {
   height: 80px;
   font-size: 37px;
   font-weight: normal;
-  background: #fec84f;
+  background: #353889;
   color: #fff;
   border-radius: 10px;
   line-height: 80px;

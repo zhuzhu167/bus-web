@@ -1,13 +1,15 @@
 <template>
-  <div class="card-container fadeIn">
+  <div class="card-container">
     <div class="card">
       <div class="card-title">
         <div class="card-station">
-          <i-icon size="20" color="#fec84f" type="coordinates_fill" />
+          <i-icon size="20" color="#353889" type="coordinates_fill" />
           {{ station }}
         </div>
-        <div class="card-station-num">3个站点</div>
-        <div class="card-station-distance">500m</div>
+        <div class="card-dis">
+          <div class="card-station-num">3个站点</div>
+          <div class="card-station-distance">500m</div>
+        </div>
       </div>
       <div class="card-station-route" v-for="(item,index) in route[0]" :key="index">
         <div class="one">
@@ -16,7 +18,7 @@
         <div class="two">
           <div class="destination">开往{{ item.startSta }}</div>
           <div class="time">
-            <i-icon size="15" color="#fec84f" type="time" />
+            <i-icon size="15" color="#353889" type="time" />
             首{{ item.startT }} | 末{{ item.endT }}
           </div>
         </div>
@@ -45,19 +47,22 @@ export default {
 
 <style scoped>
 .card {
-  background-color: #fff;
-  border-radius: 10px;
-  margin-bottom: 35px;
+  border-radius: 70px;
+  margin: 0 30px;
 }
 .card-title {
   display: flex;
   height: 110px;
   line-height: 110px;
-  padding-left: 50px;
+  padding-left: 20px;
 }
 .card-station {
+  flex: 2;
   font-size: 35px;
   margin-right: 20px;
+}
+.card-dis{
+  flex: 1;
 }
 .card-station img {
   width: 30px;
@@ -68,10 +73,12 @@ export default {
   color: #a8a8a8;
   font-size: 30px;
   margin-right: 20px;
+  display: inline-block;
 }
 .card-station-distance {
   color: #a8a8a8;
   font-size: 30px;
+  display: inline-block;
 }
 .card-station-route {
   height: 180px;
@@ -79,7 +86,7 @@ export default {
 }
 .one {
   display: flex;
-  padding: 0 50px;
+  padding: 0 20px;
   height: 90px;
   line-height: 120px;
   font-size: 35px;
@@ -93,7 +100,7 @@ export default {
 }
 .two {
   display: flex;
-  padding: 0 50px;
+  padding: 0 20px;
   color: #a8a8a8;
   font-size: 30px;
   height: 90px;

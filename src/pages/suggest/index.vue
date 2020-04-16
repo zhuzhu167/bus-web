@@ -1,7 +1,9 @@
 <template>
   <div class="suggest-container fadeIn">
     <i-toast id="toast" />
-    <i-toast id="toast" />
+    <div class="return-black">
+      <i-icon type="return" color="#353889" size="35" @click="comeBack()" />
+    </div>
     <div class="card-title">快速反馈</div>
     <div class="msg-card">
       <div class="msg-item" @click="toFeedBack('线路变更')">
@@ -110,13 +112,16 @@ export default {
       wx.navigateTo({
         url: "/pages/suggestMy/main"
       });
+    },
+    comeBack() {
+      wx.navigateBack(-1);
     }
   }
 };
 </script>
 <style>
 page {
-  background-color: #f1f1f1;
+  background-color: #fff;
 }
 </style>
 <style scoped>
@@ -125,13 +130,14 @@ page {
 }
 .card-title {
   margin: 30px 30px 30px 40px;
-  color: #a8a8a8;
+  color: #353889;
   font-size: 30px;
 }
 .msg-card {
   margin: 30px 30px 0 30px;
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px 0px;
 }
 .msg-item {
   height: 90px;
@@ -163,7 +169,7 @@ page {
   line-height: 130px;
   text-align: center;
   font-size: 30px;
-  background-color: #fec84f;
+  background-color: #353889;
   color: #fff;
 }
 </style>

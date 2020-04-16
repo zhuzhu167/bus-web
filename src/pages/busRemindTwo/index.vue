@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="box" @touchstart="touchStart" @touchend="touchEnd">
+    <!-- <div class="return-black">
+      <i-icon type="return" color="#353889" size="35" @click="comeBack()" />
+    </div>-->
     <i-toast id="toast" />
     <i-cell :title="busNum + ' 号线'" value="请选择以下站点"></i-cell>
     <div>
@@ -10,13 +13,16 @@
         :key="index"
       >
         <div class="card-title">
-          <i-icon type="label_fill" color="#fec84f" />
+          <i-icon type="label_fill" color="#353889" />
           <p class="card-title-p">{{ item }}站</p>
           <div class="item-img">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
           </div>
         </div>
       </div>
+    </div>
+    <div class="return-foot">
+      <p>向右滑动返回上一层</p>
     </div>
   </div>
 </template>
@@ -55,6 +61,9 @@ export default {
           nextStation
       });
       Object.assign(this.$data, this.$options.data());
+    },
+    comeBack() {
+      wx.navigateBack(-1);
     }
   },
   store
@@ -62,11 +71,15 @@ export default {
 </script>
 <style>
 page {
-  background-color: #f1f1f1;
+  background-color: #fff;
   height: 100%;
 }
 </style>
 <style scoped>
+.box {
+  height: 100%;
+  padding-top: 20%;
+}
 .search-head {
   align-items: center;
   height: 80px;
@@ -95,7 +108,7 @@ page {
   margin: 0 auto;
   height: 80px;
   font-size: 30px;
-  background: #fec84f;
+  background: #353889;
   color: #fff;
   border-radius: 50px;
   line-height: 80px;
@@ -118,7 +131,7 @@ button::after {
 }
 .card-title {
   line-height: 80px;
-  font-size: 35px;
+  font-size: 30px;
 }
 .card-title-p {
   margin-left: 25px;

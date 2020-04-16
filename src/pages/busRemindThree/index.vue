@@ -1,44 +1,51 @@
 <template>
-  <div class="remind-container fadeIn">
+  <div class="fadeIn">
     <i-toast id="toast" />
-    <i-cell-group>
-      <i-cell :label="busNum+' 号线'" :title="'下一站为：'+nextStation" :value="station"></i-cell>
-    </i-cell-group>
-    <i-cell-group>
-      <i-cell title="提醒站距">
-        <input
-          slot="footer"
-          v-model="distance"
-          @click="openDistance()"
-          class="weui-input"
-          placeholder="请选择"
-        />
-      </i-cell>
-      <i-cell title="重复">
-        <input slot="footer" v-model="minute" type="number" class="weui-input" placeholder="分钟" />
-      </i-cell>
-      <i-cell title="开始时间">
-        <picker
-          slot="footer"
-          mode="time"
-          :value="start"
-          start="06:00"
-          end="22:00"
-          @change="setStart"
-        >
-          <view class="picker">{{ start?start:'请选择' }}</view>
-        </picker>
-      </i-cell>
-      <i-cell title="结束时间">
-        <picker slot="footer" mode="time" :value="end" start="06:01" end="22:00" @change="setEnd">
-          <view class="picker">{{ end?end:'请选择' }}</view>
-        </picker>
-      </i-cell>
-      <i-cell title="提醒多辆">
-        <switch slot="footer" checked color="#fec84f" />
-      </i-cell>
-    </i-cell-group>
-    <i-button @click="setClock()" type="success" shape="circle" size="small">确定</i-button>
+    <div class="return-black" >
+      <i-icon type="return" color="#353889" size="35" @click="comeBack()"/>
+    </div>
+    <div class="remind-container">
+      <i-cell-group>
+        <i-cell :label="busNum+' 号线'" :title="'下一站为：'+nextStation" :value="station"></i-cell>
+      </i-cell-group>
+      <i-cell-group>
+        <i-cell title="提醒站距">
+          <input
+            slot="footer"
+            v-model="distance"
+            @click="openDistance()"
+            class="weui-input"
+            placeholder="请选择"
+          />
+        </i-cell>
+        <i-cell title="重复">
+          <input slot="footer" v-model="minute" type="number" class="weui-input" placeholder="分钟" />
+        </i-cell>
+        <i-cell title="开始时间">
+          <picker
+            slot="footer"
+            mode="time"
+            :value="start"
+            start="06:00"
+            end="22:00"
+            @change="setStart"
+          >
+            <view class="picker">{{ start?start:'请选择' }}</view>
+          </picker>
+        </i-cell>
+        <i-cell title="结束时间">
+          <picker slot="footer" mode="time" :value="end" start="06:01" end="22:00" @change="setEnd">
+            <view class="picker">{{ end?end:'请选择' }}</view>
+          </picker>
+        </i-cell>
+        <i-cell title="提醒多辆">
+          <switch slot="footer" checked color="#353889" />
+        </i-cell>
+      </i-cell-group>
+      <div class="btn">
+        <i-button @click="setClock()" shape="circle" size="small">确定</i-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -113,6 +120,9 @@ export default {
           type: "error"
         });
       }
+    },
+    comeBack() {
+      wx.navigateBack(-1);
     }
   },
   store
@@ -120,9 +130,24 @@ export default {
 </script>
 <style>
 page {
-  background-color: #f1f1f1;
+  background-color: #fff;
   height: 100%;
 }
 </style>
 <style scoped>
+.remind-container {
+  padding: 0 40px;
+  overflow: hidden;
+}
+.return {
+  margin: 10% 5%;
+  margin-bottom: 10%;
+}
+.btn {
+  position: absolute;
+  bottom: 0;
+  width: auto;
+  margin-bottom: 30px;
+  right: 40px;
+}
 </style>

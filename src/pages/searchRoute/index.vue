@@ -1,7 +1,10 @@
 <template>
-  <div class="card">
+  <div class="card undraw_navigator_a479" @touchstart="touchStart" @touchend="touchEnd">
     <i-toast id="toast" />
     <StationCard :route="SynsStationList" :station="station"></StationCard>
+    <div class="return-foot">
+      <p>向右滑动返回上一层</p>
+    </div>
   </div>
 </template>
 
@@ -35,6 +38,7 @@ export default {
     this.SET_SYNSTATIONLIST_NULL([]);
     this.station = "";
   },
+
   components: {
     StationCard
   },
@@ -43,12 +47,16 @@ export default {
 </script>
 <style>
 page {
-  background-color: #f1f1f1;
+  background-color: #fff;
   height: 100%;
 }
 </style>
 <style scoped>
 .card {
-  margin: 25rpx;
+  height: 100%;
+  background-size: 110%;
+  background-repeat: no-repeat;
+  background-position: 30% 70%;
+  padding-top: 25%;
 }
 </style>

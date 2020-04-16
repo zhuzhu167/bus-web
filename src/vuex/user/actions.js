@@ -49,8 +49,8 @@ export const Login = ({
 }, data) => {
   fUser(data).then(res => {
     if (res.data.status === 200) {
-      wx.switchTab({
-        url: '/pages/user/main',
+      wx.reLaunch({
+        url: '/pages/busIndex/main',
         success() {
           $Toast({
             content: '登录成功',

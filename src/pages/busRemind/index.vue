@@ -1,33 +1,40 @@
 <template>
-  <div class="remind-container">
+  <div class="remind-container" @touchstart="touchStart" @touchend="touchEnd">
     <i-toast id="toast" />
+    <!-- <div class="return-black" >
+      <i-icon type="return" color="#353889" size="35" @click="comeBack()"/>
+    </div>-->
     <div class="remind-head">
       <div class="remind-add" @click="toNext()">
-        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        <i-icon type="add" color="#353889" size="40" />
       </div>
+      <div class="head-title">添加提醒</div>
     </div>
     <div v-if="!isRemind">
-      <i-panel title="闹钟列表">
-        <div class="clock-box" v-for="(item,index) in ClockList" :key="index">
-          <div class="box-left">
-            <i-cell
-              :key="index"
-              :label="item.busNum + ' 号线'"
-              :title="item.start + ' - ' + item.end"
-              :value="item.station"
-            ></i-cell>
-          </div>
-          <div class="box-right" @click="deleteClock(index)">
-            <i-icon type="trash" size="22" />
-          </div>
+      <i-swipeout
+        i-class="i-swipeout-demo-item"
+        :actions="actions"
+        v-for="(item,index) in ClockList"
+        :key="index"
+      >
+        <div slot="content">
+          <i-cell
+            :key="index"
+            :label="item.busNum + ' 号线'"
+            :title="item.start + ' - ' + item.end"
+            :value="item.station"
+          ></i-cell>
         </div>
-      </i-panel>
+      </i-swipeout>
     </div>
     <div class="remind-null" v-if="isRemind">
       <div class="img-clock">
-        <img src="../../../static/tabs/clock.png" alt="提醒闹钟" />
+        <img src="../../../static/tabs/undraw_time_management_30iu.png" alt="提醒闹钟" />
       </div>
       <div class="remind-tip">您还没有添加任何上车提醒</div>
+    </div>
+    <div class="return-foot">
+      <p>向右滑动返回上一层</p>
     </div>
   </div>
 </template>
@@ -37,6 +44,20 @@ import { mapGetters, mapActions } from "vuex";
 import store from "../../vuex/index";
 import { ClockList } from "../../vuex/user/getters";
 export default {
+  data() {
+    return {
+      actions: [
+        {
+          name: "删除",
+          color: "#fff",
+          fontsize: "20",
+          width: 100,
+          icon: "trash",
+          background: "#353889"
+        }
+      ]
+    };
+  },
   created() {
     this.GetClockList();
   },
@@ -60,6 +81,9 @@ export default {
     deleteClock(index) {
       this.ClockList.splice(index, 1);
       wx.setStorageSync("clockList", this.ClockList);
+    },
+    comeBack() {
+      wx.navigateBack(-1);
     }
   },
   store
@@ -67,42 +91,46 @@ export default {
 </script>
 <style>
 page {
-  background-color: #f1f1f1;
+  background-color: #fff;
   height: 100%;
 }
 </style>
 <style scoped>
 .remind-container {
+  height: 100%;
+  overflow: hidden;
+  padding-top: 20%;
 }
 .remind-head {
   height: 100px;
   background-color: #fff;
-  line-height: 100px;
-  padding: 0 35px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.remind-add {
+  padding-left: 30px;
+  flex: 1;
+}
+.head-title {
+  display: inline-block;
+  flex: 1;
+  text-align: right;
+  padding-right: 30rpx;
+  font-size: 36rpx;
+  color: #353889;
 }
 .remind-title {
   font-size: 40px;
   display: inline-block;
 }
-.remind-add {
-  color: #a3a3a3;
-  display: inline-block;
-  float: right;
-  font-weight: lighter;
-  font-size: 50px;
-}
 .remind-null {
-  position: absolute;
   top: 30%;
   width: 100%;
 }
 
 .img-clock {
   text-align: center;
-}
-.img-clock img {
-  width: 320px;
-  height: 320px;
 }
 .remind-tip {
   color: #a3a3a3;
@@ -117,7 +145,7 @@ page {
   height: 80px;
   font-size: 30px;
   font-weight: normal;
-  background: #fec84f;
+  background: #353889;
   color: #fff;
   border-radius: 10px;
   line-height: 80px;
@@ -126,6 +154,7 @@ page {
 .clock-box {
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #353889;
 }
 .box-left {
   flex: 3;
