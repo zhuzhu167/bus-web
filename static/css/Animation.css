@@ -19,20 +19,6 @@
   }
 }
 
-@keyframes fadeInDown {
-  0% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
 /* 淡出 */
 .fadeIn {
   animation: fadeio 1s;
@@ -59,38 +45,23 @@
   animation-fill-mode: both;
 }
 
-@-webkit-keyframes fadeInUp {
-  0% {
-        opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-
-  }
-
-  100% {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-}
 
 @keyframes fadeInUp {
   0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  100% {
     opacity: 1;
     -webkit-transform: none;
     transform: none;
   }
-
-  100% {
-        opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-
-  }
 }
 
-.return-foot{
-    text-align: center;
+.return-foot {
+  text-align: center;
   position: fixed;
   bottom: 0;
   margin-bottom: 40px;
@@ -98,8 +69,8 @@
   opacity: 0.5;
   color: #c4c3cc;
 }
+
 .return-black {
   margin: 10% 5%;
   margin-bottom: 10%;
 }
-

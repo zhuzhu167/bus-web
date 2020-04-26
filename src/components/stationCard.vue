@@ -1,35 +1,36 @@
 <template>
   <div class="card-container">
-    <div class="card">
+    <div class="card" v-for="(item,index) in route" :key="index" >
       <div class="card-title">
         <div class="card-station">
           <i-icon size="20" color="#353889" type="coordinates_fill" />
-          {{ station }}
+          {{ station[index] }}
         </div>
         <div class="card-dis">
           <div class="card-station-num">3个站点</div>
           <div class="card-station-distance">500m</div>
         </div>
       </div>
-      <div class="card-station-route" v-for="(item,index) in route[0]" :key="index">
+      <div class="card-station-route" v-for="(im,ix) in item" :key="ix">
         <div class="one">
-          <div class="from-to">{{ item.rname }}</div>
+          <div class="from-to">{{ im.rname }}</div>
         </div>
         <div class="two">
-          <div class="destination">开往{{ item.startSta }}</div>
+          <div class="destination">开往{{ im.startSta }}</div>
           <div class="time">
             <i-icon size="15" color="#353889" type="time" />
-            首{{ item.startT }} | 末{{ item.endT }}
+            首{{ im.startT }} | 末{{ im.endT }}
           </div>
         </div>
       </div>
+      <!-- <div @click="demo()">123</div> -->
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import store from "../vuex/index";
+import { mapGetters } from 'vuex'
+import store from '../vuex/index'
 export default {
   props: {
     route: {
@@ -38,17 +39,23 @@ export default {
     },
     station: {
       type: String,
-      default: ""
+      default: ''
+    }
+  },
+  methods: {
+    demo() {
+      console.log(this.route)
     }
   },
   store
-};
+}
 </script>
 
 <style scoped>
 .card {
-  border-radius: 70px;
   margin: 0 30px;
+  margin-bottom: 70px;
+  border-bottom: 5px solid #f8f8f8
 }
 .card-title {
   display: flex;
@@ -61,7 +68,7 @@ export default {
   font-size: 35px;
   margin-right: 20px;
 }
-.card-dis{
+.card-dis {
   flex: 1;
 }
 .card-station img {

@@ -55,7 +55,8 @@ let baseWebpackConfig = {
     mainFields: ['browser', 'module', 'main']
   },
   module: {
-    rules: [{
+    rules: [
+        {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',

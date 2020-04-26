@@ -7,3 +7,5 @@ export const SynsStationList = state => state.synsStationList
 export const SynsStationShow = state => state.synsStationShow
 export const StationList = state => state.stationList
 export const StationShow = state => state.stationShow
+export const RealTimeBus = state => state.realTimeBus
+export const StaName = state => state.staName

@@ -10,21 +10,18 @@
       </div>
       <div class="head-title">添加提醒</div>
     </div>
-    <div v-if="!isRemind">
-      <i-swipeout
-        i-class="i-swipeout-demo-item"
-        :actions="actions"
-        v-for="(item,index) in ClockList"
-        :key="index"
-      >
+    <div v-if="!isRemind" v-for="(item,index) in ClockList" :key="index">
+      <i-swipeout i-class="i-swipeout-demo-item">
         <div slot="content">
-          <i-cell
-            :key="index"
-            :label="item.busNum + ' 号线'"
-            :title="item.start + ' - ' + item.end"
-            :value="item.station"
-          ></i-cell>
+          <i-cell :label="item.busNum + ' 号线'" :title="item.start + ' - ' + item.end" :value="item.station">
+            <div class="trash" @click="deleteClock(index)">
+              <i-icon type="trash" color="#ed3f14" size="25" />
+            </div>
+          </i-cell>
         </div>
+        <!-- <div slot="button" class="i-swipeout-demo-button-group">
+          <div class="i-swipeout-demo-button">删除</div>
+        </div> -->
       </i-swipeout>
     </div>
     <div class="remind-null" v-if="isRemind">
@@ -40,54 +37,43 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import store from "../../vuex/index";
-import { ClockList } from "../../vuex/user/getters";
+import { mapGetters, mapActions } from 'vuex'
+import store from '../../vuex/index'
+import { ClockList } from '../../vuex/user/getters'
 export default {
   data() {
-    return {
-      actions: [
-        {
-          name: "删除",
-          color: "#fff",
-          fontsize: "20",
-          width: 100,
-          icon: "trash",
-          background: "#353889"
-        }
-      ]
-    };
+    return {}
   },
   created() {
-    this.GetClockList();
+    this.GetClockList()
   },
   computed: {
-    ...mapGetters("user", ["ClockList"]),
+    ...mapGetters('user', ['ClockList']),
     isRemind() {
       if (this.ClockList.length === 0) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
   },
   methods: {
-    ...mapActions("user", ["GetClockList"]),
+    ...mapActions('user', ['GetClockList']),
     toNext() {
       wx.navigateTo({
-        url: "/pages/busRemindOne/main"
-      });
+        url: '/pages/busRemindOne/main'
+      })
     },
     deleteClock(index) {
-      this.ClockList.splice(index, 1);
-      wx.setStorageSync("clockList", this.ClockList);
+      this.ClockList.splice(index, 1)
+      wx.setStorageSync('clockList', this.ClockList)
     },
     comeBack() {
-      wx.navigateBack(-1);
+      wx.navigateBack(-1)
     }
   },
   store
-};
+}
 </script>
 <style>
 page {
@@ -162,5 +148,8 @@ page {
 .box-right {
   flex: 0.4;
   color: #ed3f14;
+}
+.trash {
+  margin-top: 30rpx;
 }
 </style>

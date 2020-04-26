@@ -12,7 +12,7 @@
       <button class="search-btn" @click="find()">搜索</button>
     </div>
     <div v-if="RouteIsShow">
-      <div class="search-card fadeIn" @click="getStationDetail(str)">
+      <div class="search-card fadeIn" @click="getStationDetail(str,RouteList.rname)">
         <div class="card-left">
           <div class="card-title">{{ RouteList.rname }}</div>
           <div class="item-list">
@@ -93,9 +93,9 @@ export default {
         this.GetXStations(this.str);
       }
     },
-    getStationDetail(id) {
+    getStationDetail(id,name) {
       wx.navigateTo({
-        url: "/pages/searchStations/main?id=" + id
+        url: `/pages/searchStations/main?id=${id}&routeName=${name}`
       });
     },
     getRouteDetail(station) {
@@ -176,9 +176,6 @@ button::after {
   border-bottom: 1px solid #353889;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-}
-.search-card:active {
-  background-color: #f9f9fa;
 }
 .card-title {
   height: 90px;

@@ -30,19 +30,80 @@
       </div>
     </div>
   </div>-->
-  <div class="user-box undraw_reading_0re1">
+  <div class="user-box">
+    <i-toast id="toast" />
     <div class="user-head">
+      <div class="user-img">
+        <i-icon type="mine" color="#353889" size="70" />
+      </div>
       <div class="user-name" v-if="IsLogin">
         <p>Hello，{{ UserName }}</p>
       </div>
       <div class="user-name" v-if="!IsLogin" @click="toLogin()">
         <p>点击登录</p>
       </div>
-      <div class="user-return" @click="tobusindex()">
-        <i-icon type="enterinto_fill" color="#353889" size="35" />
+      <div class="user-return">
       </div>
     </div>
-    <div class="user-context">
+    <div class="bus-bar">
+      <div class="bus-bar-title">公 告</div>
+      2020年09月17日，中心城区公交线路全部恢复正常营运。
+    </div>
+    <div class="do-list">
+      <div class="list-card">
+        <div class="item" @click="toUrlneedLogin('clock')">
+          <div class="item-img">
+            <i-icon type="clock_fill" color="#5c196b" size="30" />
+          </div>
+          <div class="item-name">提 醒</div>
+        </div>
+        <div class="item" @click="toUrl('route')">
+          <div class="item-img">
+            <i-icon type="barrage_fill" color="#f9a11b" size="30" />
+          </div>
+          <div class="item-name">换乘查询</div>
+        </div>
+        <div class="item" @click="toUrl('news')">
+          <div class="item-img">
+            <i-icon type="browse_fill" color="#4f953b" size="30" />
+          </div>
+          <div class="item-name">趣 闻</div>
+        </div>
+        <div class="item" @click="toUrlneedLogin('like')">
+          <div class="item-img">
+            <i-icon type="like_fill" color="#E71D36" size="30" />
+          </div>
+          <div class="item-name">点 赞</div>
+        </div>
+      </div>
+      <div class="list-card">
+        <div class="item" @click="toUrlneedLogin('lost')">
+          <div class="item-img">
+            <i-icon type="service_fill" color="#0077c8" size="30" />
+          </div>
+          <div class="item-name">失物招领</div>
+        </div>
+        <div class="item" @click="toUrlneedLogin('suggest')">
+          <div class="item-img">
+            <i-icon type="brush_fill" color="#353889" size="30" />
+          </div>
+          <div class="item-name">反 馈</div>
+        </div>
+        <div class="item" @click="openRealTimeBus()">
+          <div class="item-img">
+            <i-icon type="keyboard" color="#6d6e70" size="30" />
+          </div>
+          <div class="item-name">实时路况</div>
+        </div>
+        <div class="item">
+          <div class="item-img">
+            <i-icon type="setup_fill" color="#004d73" size="30" />
+          </div>
+          <div class="item-name">设 置</div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="user-context">
       <swiper
         current="1"
         style="height:100%"
@@ -93,86 +154,99 @@
           </swiper-item>
         </block>
       </swiper>
-    </div>
+    </div> -->
     <div class="user-foot">
-      <div class="foot-item">
-        <i-icon type="brush_fill" size="27" color="#b9b9b9" @click="toUrlneedLogin('suggest')" />
-      </div>
-      <div class="foot-item">
-        <i-icon type="setup_fill" size="27" color="#b9b9b9" />
+      <div class="user-return" @click="tobusindex()">
+        <i-icon type="enterinto" color="#ccc" size="35" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import store from "../../vuex/index";
-import { mapGetters, mapActions } from "vuex";
-import { IsLogin } from "../../vuex/user/getters";
+import store from '../../vuex/index'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { IsLogin } from '../../vuex/user/getters'
+const { $Toast } = require('../../../static/dist/base/index')
 export default {
   data() {
     return {
       urlList: {
-        clock: "/pages/busRemind/main",
-        suggest: "/pages/suggest/main",
-        set: "/pages/set/main",
-        like: "/pages/like/main",
-        lost: "/pages/lost/main",
-        news: "/pages/news/main",
-        route: "/pages/route/main"
+        clock: '/pages/busRemind/main',
+        suggest: '/pages/suggest/main',
+        set: '/pages/set/main',
+        like: '/pages/like/main',
+        lost: '/pages/lost/main',
+        news: '/pages/news/main',
+        route: '/pages/route/main'
       },
       isClicked: false
-    };
+    }
   },
   created() {
-    this.isLogin();
+    this.isLogin()
   },
   computed: {
-    ...mapGetters("user", ["IsLogin", "UserName"])
+    ...mapGetters('user', ['IsLogin', 'UserName']),
+    ...mapGetters('bus', ['RealTimeBus'])
   },
   methods: {
-    ...mapActions("user", ["CheckLogin"]),
+    ...mapMutations('bus', ['SET_REAL_TIME_BUS']),
+    ...mapActions('user', ['CheckLogin']),
     // 判断是否登录
     isLogin() {
-      if (wx.getStorageSync("loginName") != "") {
-        this.CheckLogin(wx.getStorageSync("userName"));
+      if (wx.getStorageSync('loginName') != '') {
+        this.CheckLogin(wx.getStorageSync('userName'))
       }
     },
     // 控制页面跳转
     toUrlneedLogin(url) {
       if (true) {
-        let _this = this;
-        this.isClicked = true;
+        let _this = this
+        this.isClicked = true
         wx.navigateTo({
           url: this.urlList[url]
-        });
+        })
         setTimeout(function() {
-          _this.isClicked = false;
-        }, 50);
+          _this.isClicked = false
+        }, 50)
       } else {
         wx.showToast({
-          title: "请先登录",
-          icon: "none",
+          title: '请先登录',
+          icon: 'none',
           duration: 2000
-        });
+        })
       }
     },
     toUrl(url) {
       wx.navigateTo({
         url: this.urlList[url]
-      });
+      })
     },
     toLogin() {
       wx.navigateTo({
-        url: "/pages/login/main"
-      });
+        url: '/pages/login/main'
+      })
     },
     tobusindex() {
-      wx.navigateBack(-1);
+      wx.navigateBack(-1)
+    },
+    openRealTimeBus() {
+      this.SET_REAL_TIME_BUS(!this.RealTimeBus)
+      console.log(this.RealTimeBus)
+      if (this.RealTimeBus) {
+        $Toast({
+          content: '已开启实时路况'
+        })
+      } else {
+        $Toast({
+          content: '已关闭实时路况'
+        })
+      }
     }
   },
   store
-};
+}
 </script>
 
 <style>
@@ -191,35 +265,64 @@ page {
   background-position: top;
 }
 .user-head {
-  flex: 1;
   margin-top: 20%;
   display: flex;
   padding: 0 50px;
   font-size: 50px;
-  color: #353889;
+  color: #000;
   align-items: center;
 }
-.user-name {
+.user-img {
   flex: 1;
   text-align: left;
 }
+.user-name {
+  flex: 2;
+  text-align: center;
+}
+
 .user-return {
-  flex: 1;
-  text-align: right;
+  flex: 2;
+  text-align: center;
 }
 .user-context {
-  flex: 6;
   position: relative;
   margin-top: 56px;
   padding-top: 45%;
   padding-bottom: 15%;
 }
+.do-list {
+  margin: 50px 30px;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 10px 0;
+  background-color: #fff;
+}
+.list-card {
+  display: flex;
+  padding: 50px 20px;
+}
+.item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.item-img {
+  text-align: center;
+  height: 70px;
+}
+.item-name {
+  color: #000;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 25px;
+}
 .user-foot {
-  flex: 2;
+  position: absolute;
   background-color: #fff;
   display: flex;
-  padding: 0 10%;
   align-items: center;
+  bottom: 40px;
+  width: 100%;
 }
 .foot-item {
   flex: 1;
@@ -258,5 +361,17 @@ page {
   font-weight: lighter;
   font-size: 45px;
   padding-top: 30%;
+}
+.bus-bar {
+  margin: 60px 30px 10px 30px;
+  background-color: #353889;
+  border-radius: 30px;
+  padding: 30px 50px;
+  color: #fff;
+}
+.bus-bar-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 </style>

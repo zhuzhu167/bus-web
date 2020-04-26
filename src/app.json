@@ -1,11 +1,11 @@
 {
     "pages": [
         "pages/busIndex/main",
+        "pages/user/main",
         "pages/index/main",
         "pages/route/main",
         "pages/routeStations/main",
         "pages/news/main",
-        "pages/user/main",
         "pages/search/main",
         "pages/searchStations/main",
         "pages/searchRoute/main",
@@ -40,7 +40,8 @@
         "i-index-item": "../static/dist/index-item/index",
         "i-steps": "../static/dist/steps/index",
         "i-step": "../static/dist/step/index",
-        "i-swipeout": "../static/dist/swipeout/index"
+        "i-swipeout": "../static/dist/swipeout/index",
+        "i-notice-bar": "../static/dist/notice-bar/index"
     },
     "permission": {
         "scope.userLocation": {
