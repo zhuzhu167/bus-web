@@ -1,7 +1,7 @@
 <template>
   <div class="card undraw_navigator_a479" @touchstart="touchStart" @touchend="touchEnd">
     <i-toast id="toast" />
-    <StationCard :route="SynsStationList" :station="station"></StationCard>
+    <Station :route="SynsStationList" :station="station"></Station>
     <div class="return-foot">
       <p>向右滑动返回上一层</p>
     </div>
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import StationCard from "@/components/stationCard";
+import Station from "@/components/station";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import store from "../../vuex/index";
 export default {
@@ -20,7 +20,7 @@ export default {
   },
   onShow() {
     this.init();
-    this.GetRoutesMsg(this.station);
+    // this.GetRoutesMsg(this.station);
   },
   computed: {
     ...mapGetters("bus", ["SynsStationList"])
@@ -32,6 +32,7 @@ export default {
       var pages = getCurrentPages();
       var currPage = pages[pages.length - 1];
       this.station = currPage.options.station;
+      // console.error(this.station);
     }
   },
   onUnload() {
@@ -40,8 +41,9 @@ export default {
   },
 
   components: {
-    StationCard
+    Station
   },
+  onHide() {},
   store
 };
 </script>

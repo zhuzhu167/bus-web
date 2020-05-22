@@ -29,7 +29,7 @@
               坐 {{ TransferList[0] }}
               <div style="display:inline-block" v-if="TransferList[2]">
                 号线，在{{ TransferList[2] }}站
-                <p style="display:inline-block;color:#353889"> 转</p>
+                <p style="display:inline-block;color:#353889">转</p>
                 {{ TransferList[1] }} 号线
               </div>
             </div>
@@ -47,95 +47,95 @@
 </template>
 
 <script>
-const { $Toast } = require('../../../static/dist/base/index')
-import { mapGetters, mapActions, mapMutations } from 'vuex'
-import store from '../../vuex/index'
+const { $Toast } = require("../../../static/dist/base/index");
+import { mapGetters, mapActions, mapMutations } from "vuex";
+import store from "../../vuex/index";
 export default {
   data() {
     return {
-      from: '',
-      to: '',
-      start: '',
-      end: ''
-    }
+      from: "",
+      to: "",
+      start: "",
+      end: ""
+    };
   },
   computed: {
-    ...mapGetters('bus', ['TransferList', 'TransferIsShow'])
+    ...mapGetters("bus", ["TransferList", "TransferIsShow"])
   },
   methods: {
-    ...mapActions('bus', [
-      'LessTransfer',
-      'GetSEStationsTran',
-      'GetSEStations'
+    ...mapActions("bus", [
+      "LessTransfer",
+      "GetSEStationsTran",
+      "GetSEStations"
     ]),
-    ...mapMutations('bus', ['SET_TRANSFER_SHOW']),
+    ...mapMutations("bus", ["SET_TRANSFER_SHOW"]),
     exchangeFromTo() {
-      let temp = ''
-      if (this.from != '' && this.to != '') {
-        temp = this.from
-        this.from = this.to
-        this.to = temp
+      let temp = "";
+      if (this.from != "" && this.to != "") {
+        temp = this.from;
+        this.from = this.to;
+        this.to = temp;
       }
     },
     find() {
-      if (this.from == '') {
+      if (this.from == "") {
         $Toast({
-          content: '出发点不能为空',
-          type: 'error'
-        })
-        return
+          content: "出发点不能为空",
+          type: "error"
+        });
+        return;
       }
-      if (this.to == '') {
+      if (this.to == "") {
         $Toast({
-          content: '目的地不能为空',
-          type: 'error'
-        })
-        return
+          content: "目的地不能为空",
+          type: "error"
+        });
+        return;
       }
       let data = {
         start: this.from,
         end: this.to
-      }
-      this.LessTransfer(data)
-      this.start = this.from
-      this.end = this.to
+      };
+      this.LessTransfer(data);
+      this.start = this.from;
+      this.end = this.to;
     },
     getDetailStationT() {
-      console.log(this.TransferList)
-      if (this.TransferList[2] != '') {
+      console.log(this.TransferList);
+      if (this.TransferList[2] != "") {
         let data = {
           sta: this.start,
           end: this.end,
           tran: this.TransferList[2],
           rid: this.TransferList[0],
           ridTran: this.TransferList[1]
-        }
-        this.GetSEStationsTran(data)
+        };
+        this.GetSEStationsTran(data);
         wx.reLaunch({
-          url: '/pages/routeStations/main'
-        })
+          url: "/pages/routeStations/main"
+        });
       } else {
         let data = {
           sta: this.start,
           end: this.end,
           rid: this.TransferList[0]
-        }
-        this.GetSEStations(data)
+        };
+        this.GetSEStations(data);
         wx.reLaunch({
-          url: '/pages/routeStations/main'
-        })
+          url: "/pages/routeStations/main"
+        });
       }
     },
     comeBack() {
-      wx.navigateBack(-1)
+      wx.navigateBack(-1);
     }
   },
   onUnload() {
-    Object.assign(this.$data, this.$options.data())
-    this.SET_TRANSFER_SHOW(false)
+    Object.assign(this.$data, this.$options.data());
+    this.SET_TRANSFER_SHOW(false);
   },
   store
-}
+};
 </script>
 
 <style>
@@ -214,6 +214,7 @@ button::after {
   background-color: #fff;
   border-radius: 10px;
   padding: 0 35px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px 0px;
 }
 .card-title {
   height: 110px;

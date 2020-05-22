@@ -72,9 +72,10 @@ export default {
       "SET_ROUTE_LIST",
       "SET_ROUTE_SHOW",
       "SET_STATIONLIST",
-      "SET_STATION_SHOW"
+      "SET_STATION_SHOW",
+      "SET_SYNSTATIONLIST_NULL"
     ]),
-    ...mapActions("bus", ["SearchRoute", "GetXStations"]),
+    ...mapActions("bus", ["SearchRoute", "GetXStations", "GetRoutesMsg"]),
     find() {
       if (this.str == "") {
         $Toast({
@@ -93,12 +94,14 @@ export default {
         this.GetXStations(this.str);
       }
     },
-    getStationDetail(id,name) {
+    getStationDetail(id, name) {
       wx.navigateTo({
         url: `/pages/searchStations/main?id=${id}&routeName=${name}`
       });
     },
     getRouteDetail(station) {
+      this.SET_SYNSTATIONLIST_NULL();
+      this.GetRoutesMsg(station);
       wx.navigateTo({
         url: "/pages/searchRoute/main?station=" + station
       });
@@ -110,6 +113,9 @@ export default {
     this.SET_ROUTE_SHOW(false);
     this.SET_ROUTE_LIST([]);
     this.str = "";
+  },
+  onHide() {
+    $Toast.hide();
   },
   store
 };

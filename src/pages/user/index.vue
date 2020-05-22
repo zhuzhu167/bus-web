@@ -42,12 +42,10 @@
       <div class="user-name" v-if="!IsLogin" @click="toLogin()">
         <p>点击登录</p>
       </div>
-      <div class="user-return">
-      </div>
+      <div class="user-return"></div>
     </div>
     <div class="bus-bar">
-      <div class="bus-bar-title">公 告</div>
-      2020年09月17日，中心城区公交线路全部恢复正常营运。
+      <div class="bus-bar-title">公 告</div>2020年09月17日，中心城区公交线路全部恢复正常营运。
     </div>
     <div class="do-list">
       <div class="list-card">
@@ -95,7 +93,7 @@
           </div>
           <div class="item-name">实时路况</div>
         </div>
-        <div class="item">
+        <div class="item" @click="set()">
           <div class="item-img">
             <i-icon type="setup_fill" color="#004d73" size="30" />
           </div>
@@ -154,7 +152,7 @@
           </swiper-item>
         </block>
       </swiper>
-    </div> -->
+    </div>-->
     <div class="user-foot">
       <div class="user-return" @click="tobusindex()">
         <i-icon type="enterinto" color="#ccc" size="35" />
@@ -164,89 +162,94 @@
 </template>
 
 <script>
-import store from '../../vuex/index'
-import { mapGetters, mapActions, mapMutations } from 'vuex'
-import { IsLogin } from '../../vuex/user/getters'
-const { $Toast } = require('../../../static/dist/base/index')
+import store from "../../vuex/index";
+import { mapGetters, mapActions, mapMutations } from "vuex";
+import { IsLogin } from "../../vuex/user/getters";
+const { $Toast } = require("../../../static/dist/base/index");
 export default {
   data() {
     return {
       urlList: {
-        clock: '/pages/busRemind/main',
-        suggest: '/pages/suggest/main',
-        set: '/pages/set/main',
-        like: '/pages/like/main',
-        lost: '/pages/lost/main',
-        news: '/pages/news/main',
-        route: '/pages/route/main'
+        clock: "/pages/busRemind/main",
+        suggest: "/pages/suggest/main",
+        set: "/pages/set/main",
+        like: "/pages/like/main",
+        lost: "/pages/lost/main",
+        news: "/pages/news/main",
+        route: "/pages/route/main"
       },
       isClicked: false
-    }
+    };
   },
   created() {
-    this.isLogin()
+    this.isLogin();
   },
   computed: {
-    ...mapGetters('user', ['IsLogin', 'UserName']),
-    ...mapGetters('bus', ['RealTimeBus'])
+    ...mapGetters("user", ["IsLogin", "UserName"]),
+    ...mapGetters("bus", ["RealTimeBus"])
   },
   methods: {
-    ...mapMutations('bus', ['SET_REAL_TIME_BUS']),
-    ...mapActions('user', ['CheckLogin']),
+    ...mapMutations("bus", ["SET_REAL_TIME_BUS"]),
+    ...mapActions("user", ["CheckLogin"]),
     // 判断是否登录
     isLogin() {
-      if (wx.getStorageSync('loginName') != '') {
-        this.CheckLogin(wx.getStorageSync('userName'))
+      if (wx.getStorageSync("loginName") != "") {
+        this.CheckLogin(wx.getStorageSync("userId"));
       }
     },
     // 控制页面跳转
     toUrlneedLogin(url) {
       if (true) {
-        let _this = this
-        this.isClicked = true
+        let _this = this;
+        this.isClicked = true;
         wx.navigateTo({
           url: this.urlList[url]
-        })
+        });
         setTimeout(function() {
-          _this.isClicked = false
-        }, 50)
+          _this.isClicked = false;
+        }, 50);
       } else {
         wx.showToast({
-          title: '请先登录',
-          icon: 'none',
+          title: "请先登录",
+          icon: "none",
           duration: 2000
-        })
+        });
       }
     },
     toUrl(url) {
       wx.navigateTo({
         url: this.urlList[url]
-      })
+      });
     },
     toLogin() {
       wx.navigateTo({
-        url: '/pages/login/main'
-      })
+        url: "/pages/login/main"
+      });
     },
     tobusindex() {
-      wx.navigateBack(-1)
+      wx.navigateBack(-1);
     },
     openRealTimeBus() {
-      this.SET_REAL_TIME_BUS(!this.RealTimeBus)
-      console.log(this.RealTimeBus)
+      this.SET_REAL_TIME_BUS(!this.RealTimeBus);
+      console.log(this.RealTimeBus);
       if (this.RealTimeBus) {
         $Toast({
-          content: '已开启实时路况'
-        })
+          content: "已开启实时路况"
+        });
       } else {
         $Toast({
-          content: '已关闭实时路况'
-        })
+          content: "已关闭实时路况"
+        });
       }
+    },
+    set() {
+      $Toast({
+        content: "敬请期待"
+      });
     }
   },
   store
-}
+};
 </script>
 
 <style>
@@ -277,7 +280,6 @@ page {
   text-align: left;
 }
 .user-name {
-  flex: 2;
   text-align: center;
 }
 

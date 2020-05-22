@@ -4,7 +4,7 @@
       <div class="card-title">
         <div class="card-station">
           <i-icon size="20" color="#353889" type="coordinates_fill" />
-          {{ station[index] }}
+          {{ station }}
         </div>
         <div class="card-dis">
           <!-- <div class="card-station-num">{{ staNum*index^2+1 }}个站点</div>

@@ -1,23 +1,17 @@
 <template>
-  <div class="register-container undraw_mobile_web_2g8b"
-       @touchstart="touchStart"
-       @touchend="touchEnd">
+  <div
+    class="register-container undraw_mobile_web_2g8b"
+    @touchstart="touchStart"
+    @touchend="touchEnd"
+  >
     <i-toast id="toast" />
     <div class="register-box">
       <div class="register-title">Hi，欢迎加入我们</div>
       <div class="register-input">
-        <input type="text"
-               v-model="loginName"
-               placeholder="账号" />
-        <input type="text"
-               v-model="phone"
-               placeholder="手机" />
-        <input type="text"
-               v-model="password"
-               placeholder="密码" />
-        <button class="register-btn"
-                open-type="getUserInfo"
-                @getuserinfo="register">注册</button>
+        <input type="text" v-model="loginName" placeholder="账号" />
+        <input type="text" v-model="phone" placeholder="手机" />
+        <input type="password" v-model="password" placeholder="密码" />
+        <button class="register-btn" open-type="getUserInfo" @getuserinfo="register">注册</button>
       </div>
     </div>
     <div class="return-foot">
@@ -27,74 +21,74 @@
 </template>
 
 <script>
-const { $Toast } = require('../../../static/dist/base/index')
-import store from '../../vuex'
-import { mapActions } from 'vuex'
+const { $Toast } = require("../../../static/dist/base/index");
+import store from "../../vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      loginName: '',
-      password: '',
-      phone: ''
-    }
+      loginName: "",
+      password: "",
+      phone: ""
+    };
   },
   onLoad() {
     wx.getSetting({
       success(res) {
-        if (!res.authSetting['scope.userInfo']) {
-          console.log('未授权,正在授权')
+        if (!res.authSetting["scope.userInfo"]) {
+          console.log("未授权,正在授权");
           wx.authorize({
-            scope: ' scope.userInfo',
+            scope: " scope.userInfo",
             success() {
-              console.log('授权成功')
+              console.log("授权成功");
             }
-          })
+          });
         } else {
-          console.log('已授权')
+          console.log("已授权");
         }
       }
-    })
+    });
   },
   methods: {
-    ...mapActions('user', ['Register']),
+    ...mapActions("user", ["Register"]),
     // 注册
     register(e) {
-      if (this.loginName == '') {
+      if (this.loginName == "") {
         $Toast({
-          content: '账号不能为空',
-          type: 'error'
-        })
-        return
+          content: "账号不能为空",
+          type: "error"
+        });
+        return;
       }
-      if (this.password == '') {
+      if (this.password == "") {
         $Toast({
-          content: '密码不能为空',
-          type: 'error'
-        })
-        return
+          content: "密码不能为空",
+          type: "error"
+        });
+        return;
       }
-      if (this.phone == '') {
+      if (this.phone == "") {
         $Toast({
-          content: '手机号码不能为空',
-          type: 'error'
-        })
-        return
+          content: "手机号码不能为空",
+          type: "error"
+        });
+        return;
       }
       let data = {
         loginName: this.loginName,
         password: this.password,
         phone: this.phone,
         userName: e.mp.detail.userInfo.nickName
-      }
-      this.userName = e.mp.detail.userInfo.nickName
-      this.Register(data)
+      };
+      this.userName = e.mp.detail.userInfo.nickName;
+      this.Register(data);
     }
   },
   onUnload() {
-    Object.assign(this.$data, this.$options.data())
+    Object.assign(this.$data, this.$options.data());
   },
   store
-}
+};
 </script>
 <style >
 page {
